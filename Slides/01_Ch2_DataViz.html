@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Visualization</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="pres2.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Visualization
+## Cohen Chapter 2 <br><br> .small[EDUC/PSY 6600]
+
+---
+
+
+
+
+
+# Always plot your data first!
+
+&lt;br&gt;
+.center[.Huge["Always." - Severus Snape]]
+&lt;br&gt;
+
+--
+### Why?
+
+.large[
+- .dcoral[Outliers] and impossible values
+
+- Determine correct .nicegreen[statistical approach]
+
+- .bluer[Assumptions] and diagnostics
+
+- Discover new .nicegreen[relationships]
+]
+
+
+---
+background-image: url(figures/fig_misleading_graph1.png)
+background-position: 90% 60%
+background-size: 500px
+
+# The Visualization Paradox
+
+&lt;br&gt;
+.pull-left[.large[
+- Often the .dcoral[most informative] aspect of analysis
+- .nicegreen[Communicates] the "data story" the best
+- Most abused area of quantitative science
+- Figures can be *very* .bluer[misleading]
+]]
+
+.footnote[[Misleading Graphs](https://venngage.com/blog/misleading-graphs/)]
+
+---
+background-image: url(figures/fig_misleading_graph1_fixed.png)
+background-position: 50% 80%
+background-size: 700px
+
+# Much better
+
+---
+# Keys to Good Viz's
+
+.pull-left[.huge[
+- .dcoral[Graphical method] should match .dcoral[level of measurement]
+- Label all axes and include figure caption
+- .nicegreen[Simplicity and clarity]
+- .bluer[Avoid of ‘chartjunk’]
+]]
+
+--
+
+.pull-right[.huge[
+- Unless there are 3 or more variables, avoid 3D figures (and even then, avoid it)
+- Black &amp; white, grayscale/pattern fine for most simple figures
+]]
+
+
+---
+# Data Visulations
+
+.huge[Takes practice -- try a bunch of stuff]
+
+--
+
+### Resources
+
+.large[.large[
+- [Edward Tufte's books](https://www.edwardtufte.com/tufte/books_vdqi)
+- ["R for Data Science"](http://r4ds.had.co.nz/) by Grolemund and Wickham
+- ["Data Visualization for Social Science"](http://socviz.co/) by Healy
+]]
+
+
+---
+# Frequency Distributions
+
+
+.pull-left[
+.huge[.bluer[Counting] the number of occurrences of unique events]
+
+- Categorical or continuous
+- just like with `tableF()` and `table1()`
+]
+
+.pull-right[
+.large[
+Can see .dcoral[central tendency] (continuous data) or .dcoral[most common value] (categorical data)
+]
+
+.large[Can see .nicegreen[range and extremes]]
+]
+
+
+
+```
+                    
+                    ──────────────────────────────────────────────────────
+                     x       Freq CumFreq Percent CumPerc Valid  CumValid
+                     1       253  253     25.30%  25.30%  25.98% 25.98%  
+                     2       259  512     25.90%  51.20%  26.59% 52.57%  
+                     3       235  747     23.50%  74.70%  24.13% 76.69%  
+                     4       227  974     22.70%  97.40%  23.31% 100.00% 
+                     Missing 26   1000    2.60%   100.00%                
+                    ──────────────────────────────────────────────────────
+```
+
+---
+# Frequencies and Viz's Together ❤️
+
+.pull-left[
+### Bar Graph
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+
+--
+
+.pull-right[
+### Histogram
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+???
+What differences do you notice between them?
+
+##### Bar
+- Do NOT touch each other
+- Begin and terminate at real limits
+- Centered on the value
+- Height = frequency
+
+##### Histogram
+- Touch each other
+- Begin and terminate at real limits
+- Centered on interval midpoint
+- Height = frequency
+- Interval size or ‘bin’ determines shape
+    - Too narrow or too wide problematic
+- Useful for checking distributional assumptions
+
+
+---
+# What does DISTRIBUTION mean?
+
+### The way that the data points are scattered
+
+--
+
+.pull-left[.large[.large[
+**For .dcoral[Continuous]**
+
+- General shape
+- Exceptions (outliers)
+- Modes (peaks)
+- Center &amp; spread (chap 3)
+- Histogram
+]]]
+
+.pull-right[.large[.large[
+**For .nicegreen[Categorical]**
+
+- Counts of each
+- Percent or Rate (adjusts for an ‘out of’ to compare)
+- Bar chart
+- Pie chart - avoid!
+]]]
+
+---
+class: inverse, center, middle
+
+# Let's Apply This To the Inho Dataset
+
+
+---
+background-image: url(figures/fig_inho_data_desc.png)
+background-position: 50% 80%
+background-size: 800px
+
+# Reminder
+
+
+---
+# Read in the Data
+
+
+```r
+## Data is in .sav form (SPSS)
+library(haven)
+d &lt;- read_spss("Data/Ihno_dataset.sav")
+```
+
+
+
+--
+### And Clean It
+
+
+```r
+## install.packages("tidyverse")
+library(tidyverse)
+d_clean &lt;- d %&gt;%
+  mutate(Major = factor(Major, labels = c("Psychology", "Premed",
+                                          "Biology", "Sociology",
+                                          "Economics"))) %&gt;%
+  mutate(Coffee = factor(Coffee))
+```
+
+---
+# Frequency Tables Review
+
+.pull-left[
+
+```r
+library(furniture)
+tableF(d_clean, Major)
+```
+
+```
+## 
+## ─────────────────────────────────────────
+##  Major      Freq CumFreq Percent CumPerc
+##  Psychology 29   29      29.00%  29.00% 
+##  Premed     25   54      25.00%  54.00% 
+##  Biology    21   75      21.00%  75.00% 
+##  Sociology  15   90      15.00%  90.00% 
+##  Economics  10   100     10.00%  100.00%
+## ─────────────────────────────────────────
+```
+]
+
+.pull-right[
+
+```r
+tableF(d_clean, Phobia)
+```
+
+```
+## 
+## ─────────────────────────────────────
+##  Phobia Freq CumFreq Percent CumPerc
+##  0      12   12      12.00%  12.00% 
+##  1      15   27      15.00%  27.00% 
+##  2      12   39      12.00%  39.00% 
+##  3      16   55      16.00%  55.00% 
+##  4      21   76      21.00%  76.00% 
+##  5      11   87      11.00%  87.00% 
+##  6      1    88      1.00%   88.00% 
+##  7      4    92      4.00%   92.00% 
+##  8      4    96      4.00%   96.00% 
+##  9      1    97      1.00%   97.00% 
+##  10     3    100     3.00%   100.00%
+## ─────────────────────────────────────
+```
+]
+
+---
+# Frequency Viz's
+
+.Huge[For viz's, we will use `ggplot2`]
+
+&lt;br&gt;
+
+.huge[This provides the most powerful, beautiful framework for data visualizations]
+
+--
+
+.large[.large[
+- It is built on making .dcoral[layers]
+- Each plot has a .nicegreen["geom"] function
+    - e.g. `geom_bar()` for bar charts, `geom_histogram()` for histograms, etc.
+]]
+
+
+---
+# Bar Charts
+
+
+```r
+ggplot(d_clean, aes(x = Major)) +
+  geom_bar()
+```
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+# Bar Charts
+
+
+```r
+ggplot(d_clean, aes(x = Coffee)) +
+  geom_bar()
+```
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+# Histograms
+
+
+```r
+ggplot(d_clean, aes(x = Phobia)) +
+  geom_histogram(binwidth = 1)
+```
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+# Histograms (change bins to size 3)
+
+
+```r
+ggplot(d_clean, aes(x = Phobia)) +
+  geom_histogram(binwidth = 3)
+```
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+# Histograms (change bins to size 5)
+
+
+```r
+ggplot(d_clean, aes(x = Phobia)) +
+  geom_histogram(binwidth = 5)
+```
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+# Histograms
+
+
+```r
+ggplot(d_clean, aes(x = Mathquiz)) +
+  geom_histogram(binwidth = 4)
+```
+
+![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+
+---
+class: inverse, center, middle
+
+# Next Topic
+
+### Center and Spread
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
