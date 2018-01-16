@@ -1,0 +1,19 @@
+---
+title: "My First RMarkdown"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Homework 1
+
+**Answer**: Write your answer
+
+This is my first RMarkdown document.
+
+```{r}
+plot(rnorm(100), rnorm(100))
+```
+
