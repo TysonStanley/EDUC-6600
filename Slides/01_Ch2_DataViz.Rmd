@@ -223,43 +223,54 @@ background-size: 800px
 ---
 # Read in the Data
 
-```{r, eval=FALSE}
-## Data is in .sav form (SPSS)
-library(haven)
-d <- read_spss("Data/Ihno_dataset.sav")
+```{r, message=FALSE, comment=FALSE, eval=FALSE}
+library(tidyverse)   # the easy button
+library(readxl)      # read in Excel files
+library(furniture)   # nice tables
+
+data_raw <- readxl::read_excel("Ihno_dataset.xls") %>% 
+  dplyr::rename_all(tolower)                   # converts all variable names to lower case
 ```
 
-```{r, echo=FALSE}
-library(haven)
-d <- read_spss("~/Dropbox/Teaching/EDUC 6600/Data/Ihno_dataset.sav")
+```{r, message=FALSE, comment=FALSE, echo=FALSE}
+library(tidyverse)   # the easy button
+library(readxl)      # read in Excel files
+library(furniture)   # nice tables
+
+data_raw <- readxl::read_excel("Ihno_dataset.xls") %>% 
+  dplyr::rename_all(tolower)                   # converts all variable names to lower case
 ```
 
 --
 ### And Clean It
 
 ```{r, message=FALSE, warning=FALSE}
-## install.packages("tidyverse")
-library(tidyverse)
-d_clean <- d %>%
-  mutate(Major = factor(Major, labels = c("Psychology", "Premed",
-                                          "Biology", "Sociology",
-                                          "Economics"))) %>%
-  mutate(Coffee = factor(Coffee))
+data_clean <- data_raw %>%                     
+  dplyr::mutate(majorF = factor(major,
+                                levels= c(1, 2, 3, 4, 5),
+                                labels = c("Psychology", "Premed",
+                                           "Biology", "Sociology",
+                                           "Economics"))) %>%
+  dplyr::mutate(coffeeF = factor(coffee,
+                                 levels = c(0, 1),
+                                 labels = c("Not a regular coffee drinker",
+                                            "Regularly drinks coffee")))
 ```
 
 ---
-# Frequency Tables Review
+# Frequency Distrubutions
 
 .pull-left[
 ```{r, message=FALSE, warning=FALSE}
-library(furniture)
-tableF(d_clean, Major)
+data_clean %>%                 
+  furniture::tableF(major)
 ```
 ]
 
 .pull-right[
 ```{r, message=FALSE, warning=FALSE}
-tableF(d_clean, Phobia)
+data_clean %>% 
+  furniture::tableF(phobia)
 ```
 ]
 
@@ -284,49 +295,130 @@ tableF(d_clean, Phobia)
 ---
 # Bar Charts
 
-```{r, fig.width=8, fig.height=6}
-ggplot(d_clean, aes(x = Major)) +
+```{r, fig.width=8, fig.height=5.5}
+data_clean %>% 
+  ggplot(aes(major)) +
   geom_bar()
 ```
 
 ---
 # Bar Charts
 
-```{r, fig.width=8, fig.height=6}
-ggplot(d_clean, aes(x = Coffee)) +
+```{r, fig.width=8, fig.height=5.5}
+data_clean %>% 
+  ggplot(aes(coffee)) +
   geom_bar()
 ```
 
 ---
 # Histograms
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
-ggplot(d_clean, aes(x = Phobia)) +
-  geom_histogram(binwidth = 1)
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+data_clean %>% 
+  ggplot(aes(phobia)) +
+  geom_histogram()
 ```
 
 ---
-# Histograms (change bins to size 3)
+# Histograms (change number of bins)
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
-ggplot(d_clean, aes(x = Phobia)) +
-  geom_histogram(binwidth = 3)
+```{r, message=FALSE, comment=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+data_clean %>% 
+  ggplot(aes(phobia)) +
+  geom_histogram(bins = 8)
 ```
 
 ---
 # Histograms (change bins to size 5)
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
-ggplot(d_clean, aes(x = Phobia)) +
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+data_clean %>% 
+  ggplot(aes(phobia)) +
   geom_histogram(binwidth = 5)
 ```
 
 ---
 # Histograms
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
-ggplot(d_clean, aes(x = Mathquiz)) +
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+data_clean %>% 
+  ggplot(aes(mathquiz)) +
   geom_histogram(binwidth = 4)
+```
+
+---
+# Histograms -by- a Factor (columns)
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
+data_clean %>% 
+  ggplot(aes(mathquiz)) +
+  geom_histogram(binwidth = 4) +
+  facet_grid(. ~ coffeeF)
+```
+
+
+---
+# Histograms -by- a Factor (rows)
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
+data_clean %>% 
+  ggplot(aes(mathquiz)) +
+  geom_histogram(binwidth = 4) +
+  facet_grid(coffeeF ~ .)
+```
+
+---
+
+# Deciles (break into 10% chunks)
+
+```{r}
+data_clean %>% 
+  dplyr::pull(statquiz) %>% 
+  quantile(probs = c(.10, .20, .30, .40, .50, .60, .70, .80, .90))
+```
+
+---
+
+# Deciles - with missing values
+
+```{r, eval = FALSE}
+data_clean %>% 
+  dplyr::pull(mathquiz) %>% 
+  quantile(probs = c(.10, .20, .30, .40, .50, .60, .70, .80, .90))
+```
+
+`Error in quantile.default(., probs = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, : missing values and NaN's not allowed if 'na.rm' is FALSE`
+
+
+---
+# Deciles - `na.rm = TRUE`
+
+```{r}
+data_clean %>% 
+  dplyr::pull(mathquiz) %>% 
+  quantile(probs = c(.10, .20, .30, .40, .50, .60, .70, .80, .90),
+           na.rm =TRUE)
+```
+
+
+---
+
+# Quartiles (break into 4 chunks)
+
+```{r}
+data_clean %>% 
+  dplyr::pull(statquiz) %>% 
+  quantile(probs = c(0, .25, .50, .75, 1))
+```
+
+---
+
+# Percentiles 
+
+```{r}
+data_clean %>% 
+  dplyr::pull(statquiz) %>% 
+  quantile(probs = c(.01, .05, .173, .90))
 ```
 
 
