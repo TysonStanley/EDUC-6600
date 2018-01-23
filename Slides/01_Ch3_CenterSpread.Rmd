@@ -411,13 +411,11 @@ class: inverse, center, middle
 # Read in the Data
 
 ```{r, eval=FALSE}
-## Data is in .sav form (SPSS)
-## install.packages("psych")
-library(psych)
-library(haven)
 library(tidyverse)
+library(haven)
 library(furniture)
-cancer_raw <- read_spss("Data/Cancer.sav")
+library(psych)
+cancer_raw <- haven::read_spss("Cancer.sav")
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -433,8 +431,8 @@ cancer_raw <- read_spss("~/Dropbox/Teaching/EDUC 6600/Data/Cancer.sav")
 
 ```{r, message=FALSE, warning=FALSE}
 cancer_clean <- cancer_raw  %>%
-  setNames(tolower(names(.))) %>%
-  mutate(trt = factor(trt, labels = c("control", "treatment")))
+  dplyr::rename_all(tolower) %>%
+  dplyr::mutate(trtF = factor(trt, labels = c("control", "treatment")))
 ```
 
 ---
@@ -450,7 +448,7 @@ cancer_clean %>%
 .pull-right[
 ```{r, message=FALSE, warning=FALSE}
 cancer_clean %>%
-  furniture::tableF(trt)
+  furniture::tableF(trtF)
 ```
 ]
 
@@ -458,23 +456,26 @@ cancer_clean %>%
 ### Frequency Tables with `psych` and `furniture::table1`
 
 ```{r}
-cancer_clean %>% psych::describe()
+cancer_clean %>% 
+  dplyr::select(age, weighin, totalcin, totalcw2, totalcw4, totalcw6) %>%
+  psych::describe()
 ```
 
---
+---
+### Frequency Tables with `psych` and `furniture::table1`
 
 .pull-left[
 ```{r}
 cancer_clean %>%
-  furniture::table1(trt, age, weighin)
+  furniture::table1(trtF, age, weighin)
 ```
 ]
 
 .pull-right[
 ```{r}
 cancer_clean %>%
-  dplyr::group_by(trt) %>%
-  furniture::table1(trt, age, weighin)
+  dplyr::group_by(trtF) %>%
+  furniture::table1(age, weighin)
 ```
 ]
 
@@ -493,7 +494,7 @@ cancer_clean %>%
 
 ```{r}
 cancer_clean %>%
-  ggplot(aes(x = trt, 
+  ggplot(aes(x = trtF, 
              y = age)) +
   geom_boxplot()
 ```
@@ -504,7 +505,7 @@ cancer_clean %>%
 ```{r}
 cancer_clean %>%
   dplyr::filter(weighin < 172) %>%
-  ggplot(aes(x = "Full Data Set", 
+  ggplot(aes(x = "Weigh At Baseline < 172", 
              y = age)) +
   geom_boxplot()
 ```
@@ -515,7 +516,7 @@ cancer_clean %>%
 ```{r}
 cancer_clean %>%
   dplyr::filter(weighin < 172) %>%
-  ggplot(aes(x = trt, 
+  ggplot(aes(x = trtF, 
              y = age)) +
   geom_boxplot()
 ```
@@ -523,9 +524,11 @@ cancer_clean %>%
 ---
 # Boxplot for Repeated Measures
 
-```{r}
+```{r, fig.height = 4.5}
 cancer_clean %>%
-  tidyr::gather("time", "value", 6:9) %>%
+  tidyr::gather(key = "time", 
+                value = "value", 
+                totalcin, totalcw2, totalcw4, totalcw6) %>%
   ggplot(aes(x = time, 
              y = value)) +
   geom_boxplot()

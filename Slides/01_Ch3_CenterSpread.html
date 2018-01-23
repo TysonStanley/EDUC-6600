@@ -285,13 +285,11 @@ class: inverse, center, middle
 
 
 ```r
-## Data is in .sav form (SPSS)
-## install.packages("psych")
-library(psych)
-library(haven)
 library(tidyverse)
+library(haven)
 library(furniture)
-cancer_raw &lt;- read_spss("Data/Cancer.sav")
+library(psych)
+cancer_raw &lt;- haven::read_spss("Cancer.sav")
 ```
 
 
@@ -302,8 +300,8 @@ cancer_raw &lt;- read_spss("Data/Cancer.sav")
 
 ```r
 cancer_clean &lt;- cancer_raw  %&gt;%
-  setNames(tolower(names(.))) %&gt;%
-  mutate(trt = factor(trt, labels = c("control", "treatment")))
+  dplyr::rename_all(tolower) %&gt;%
+  dplyr::mutate(trtF = factor(trt, labels = c("control", "treatment")))
 ```
 
 ---
@@ -340,13 +338,13 @@ cancer_clean %&gt;%
 
 ```r
 cancer_clean %&gt;%
-  furniture::tableF(trt)
+  furniture::tableF(trtF)
 ```
 
 ```
 
 ────────────────────────────────────────
- trt       Freq CumFreq Percent CumPerc
+ trtF      Freq CumFreq Percent CumPerc
  control   14   14      56.00%  56.00% 
  treatment 11   25      44.00%  100.00%
 ────────────────────────────────────────
@@ -358,39 +356,36 @@ cancer_clean %&gt;%
 
 
 ```r
-cancer_clean %&gt;% psych::describe()
+cancer_clean %&gt;% 
+  dplyr::select(age, weighin, totalcin, totalcw2, totalcw4, totalcw6) %&gt;%
+  psych::describe()
 ```
 
 ```
          vars  n   mean    sd median trimmed   mad min   max range  skew
-id          1 25  25.60 16.31   24.0   25.19 19.27   1  58.0  57.0  0.16
-trt*        2 25   1.44  0.51    1.0    1.43  0.00   1   2.0   1.0  0.23
-age         3 25  59.64 12.93   60.0   59.95 11.86  27  86.0  59.0 -0.31
-weighin     4 25 178.28 31.98  172.8  176.57 21.05 124 261.4 137.4  0.73
-stage       5 25   1.88  1.24    1.0    1.81  1.48   0   4.0   4.0  0.73
-totalcin    6 25   6.52  1.53    6.0    6.33  0.00   4  12.0   8.0  1.80
-totalcw2    7 25   8.28  2.54    8.0    8.10  2.97   4  16.0  12.0  1.01
-totalcw4    8 25  10.36  3.47   10.0   10.19  2.97   6  17.0  11.0  0.49
-totalcw6    9 23   9.48  3.49    9.0    9.21  2.97   3  19.0  16.0  0.77
+age         1 25  59.64 12.93   60.0   59.95 11.86  27  86.0  59.0 -0.31
+weighin     2 25 178.28 31.98  172.8  176.57 21.05 124 261.4 137.4  0.73
+totalcin    3 25   6.52  1.53    6.0    6.33  0.00   4  12.0   8.0  1.80
+totalcw2    4 25   8.28  2.54    8.0    8.10  2.97   4  16.0  12.0  1.01
+totalcw4    5 25  10.36  3.47   10.0   10.19  2.97   6  17.0  11.0  0.49
+totalcw6    6 23   9.48  3.49    9.0    9.21  2.97   3  19.0  16.0  0.77
          kurtosis   se
-id          -1.25 3.26
-trt*        -2.02 0.10
 age         -0.01 2.59
 weighin      0.07 6.40
-stage       -0.90 0.25
 totalcin     4.30 0.31
 totalcw2     1.14 0.51
 totalcw4    -1.00 0.69
 totalcw6     0.53 0.73
 ```
 
---
+---
+### Frequency Tables with `psych` and `furniture::table1`
 
 .pull-left[
 
 ```r
 cancer_clean %&gt;%
-  furniture::table1(trt, age, weighin)
+  furniture::table1(trtF, age, weighin)
 ```
 
 ```
@@ -398,7 +393,7 @@ cancer_clean %&gt;%
 ────────────────────────────────
               Mean/Count (SD/%)
               n = 25           
- trt                           
+ trtF                          
     control   14 (56%)         
     treatment 11 (44%)         
  age                           
@@ -413,24 +408,21 @@ cancer_clean %&gt;%
 
 ```r
 cancer_clean %&gt;%
-  dplyr::group_by(trt) %&gt;%
-  furniture::table1(trt, age, weighin)
+  dplyr::group_by(trtF) %&gt;%
+  furniture::table1(age, weighin)
 ```
 
 ```
 
-────────────────────────────────────────
-                       trt 
-              control      treatment   
-              n = 14       n = 11      
- trt                                   
-    control   14 (100%)    0 (0%)      
-    treatment 0 (0%)       11 (100%)   
- age                                   
-              59.8 (9.0)   59.5 (17.2) 
- weighin                               
-              167.5 (23.0) 192.0 (37.4)
-────────────────────────────────────────
+───────────────────────────────────
+                  trtF 
+         control      treatment   
+         n = 14       n = 11      
+ age                              
+         59.8 (9.0)   59.5 (17.2) 
+ weighin                          
+         167.5 (23.0) 192.0 (37.4)
+───────────────────────────────────
 ```
 ]
 
@@ -453,7 +445,7 @@ cancer_clean %&gt;%
 
 ```r
 cancer_clean %&gt;%
-  ggplot(aes(x = trt, 
+  ggplot(aes(x = trtF, 
              y = age)) +
   geom_boxplot()
 ```
@@ -467,7 +459,7 @@ cancer_clean %&gt;%
 ```r
 cancer_clean %&gt;%
   dplyr::filter(weighin &lt; 172) %&gt;%
-  ggplot(aes(x = "Full Data Set", 
+  ggplot(aes(x = "Weigh At Baseline &lt; 172", 
              y = age)) +
   geom_boxplot()
 ```
@@ -481,7 +473,7 @@ cancer_clean %&gt;%
 ```r
 cancer_clean %&gt;%
   dplyr::filter(weighin &lt; 172) %&gt;%
-  ggplot(aes(x = trt, 
+  ggplot(aes(x = trtF, 
              y = age)) +
   geom_boxplot()
 ```
@@ -494,7 +486,9 @@ cancer_clean %&gt;%
 
 ```r
 cancer_clean %&gt;%
-  tidyr::gather("time", "value", 6:9) %&gt;%
+  tidyr::gather(key = "time", 
+                value = "value", 
+                totalcin, totalcw2, totalcw4, totalcw6) %&gt;%
   ggplot(aes(x = time, 
              y = value)) +
   geom_boxplot()
