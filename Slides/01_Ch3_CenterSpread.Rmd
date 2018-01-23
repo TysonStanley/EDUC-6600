@@ -162,9 +162,6 @@ gridExtra::grid.arrange(p1, p2)
 ```
 ]
 
----
-# Example
-
 
 
 ---
@@ -212,11 +209,6 @@ background-position: 50% 70%
 background-size: 1100px
 
 # Properties of the Mean and SD
-
----
-# Examples
-
-
 
 
 ---
