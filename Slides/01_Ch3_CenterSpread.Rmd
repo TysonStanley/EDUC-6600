@@ -339,7 +339,7 @@ background-size: 1000px
 ---
 # Boxplots by Group
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, fig.align='center', fig.height=6}
 set.seed(1)
 data_frame(
   group = factor(rep(c(0,1), 25)),
@@ -360,7 +360,7 @@ data_frame(
 ---
 # Density Plots
 
-```{r, echo=FALSE, fig.width=15, fig.align='center'}
+```{r, echo=FALSE, fig.width=15, fig.align='center', fig.height=6}
 set.seed(1)
 y = data_frame(
   group = factor(rep(c(0,1), 25)),
@@ -391,7 +391,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 ---
 # Quantile-Quantile (Q-Q) Plot
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, fig.align='center', fig.height=6}
 data_frame(x = rnorm(50)) %>%
   ggplot(aes(sample = x)) +
     geom_qq() +
