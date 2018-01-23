@@ -413,7 +413,7 @@ cancer_clean %&gt;%
 
 ```r
 cancer_clean %&gt;%
-  group_by(trt) %&gt;%
+  dplyr::group_by(trt) %&gt;%
   furniture::table1(trt, age, weighin)
 ```
 
