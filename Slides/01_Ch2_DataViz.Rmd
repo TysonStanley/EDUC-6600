@@ -80,7 +80,7 @@ background-size: 700px
 
 
 ---
-# Data Visulations
+# Data Visualizations
 
 .huge[Takes practice -- try a bunch of stuff]
 

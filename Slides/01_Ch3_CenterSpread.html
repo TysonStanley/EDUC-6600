@@ -38,63 +38,218 @@ background-size: 1000px
 # Three Measures of Center
 
 ---
+background-image: url(figures/fulcrum.png)
+background-position: 50% 80%
+background-size: 850px
+
 # Mean vs. Median
 
+.large[.large[
+.nicegreen[Median]: the center point, half of values are on each side, not affected by the skew, the "typical value"
 
+.dcoral[Mean]: the "balance" point, pulled to the side of the skew, not typical
 
-???
-Example with a fulcrum
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+]]
 
----
-# Distributions with Numbers
+--
 
-
-
----
-# Example
-
-
-
+.large[If distribution is symmetrical: mean = median]
 
 ---
+background-image: url(figures/fig_dist_income_2010.png)
+background-position: 50% 70%
+background-size: 1000px
+
+
+
+---
+# Distributions and Numbers
+
+.pull-left[
+.large[
+- The Median is “resistant” &amp; doesn’t change much
+- The Mean is “influenced” &amp; changes more!
+- Average does NOT mean typical
+- Average moves when we remove the high point
+]]
+
+--
+
+.pull-right[
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Distributions and Numbers
+
+.pull-left[
+.large[
+- The Median is “resistant” &amp; doesn’t change much
+- The Mean is “influenced” &amp; changes more!
+- Average does NOT mean typical
+- Average moves when we remove the high point
+- Median doesn't move when we remove the high point
+]]
+
+--
+
+.pull-right[
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+---
+background-image: url(figures/fig_three_spreads.jpg)
+background-position: 50% 70%
+background-size: 1100px
+
 # Three Measures of Spread
-
-
-
 
 
 ---
 # Best Summary of the Data?
 
+.huge[
+"... the perfect estimator does not exist." -- Rand Wilcox, 2001
+]
 
+--
+
+.pull-left[
+.large[
+## .bluer[Median and SIR]
+
+Skewed data or outliers
+]]
+
+.pull-right[
+.large[
+## .nicegreen[Mean and SD]
+
+Symmetrical and no outliers
+]]
+
+--
+
+&lt;br&gt;
+
+.large[.large[
+A .dcoral[graph gives the best overall picture of a distribution]
+]]
+
+---
+background-image: url(figures/fig_sd_properties.jpg)
+background-position: 50% 70%
+background-size: 1100px
+
+# Properties of the Mean and SD
 
 
 ---
-# Properties of the Mean and Standard Deviation
+# Skewness
 
+.pull-left[
+.large[
+- Degree of .dcoral[symmetry] in distribution
+- Can detect **visually** (histogram, boxplot)
+- Skewness statistic
+    - Based on cubed deviations from the mean
+    - Divided by SE of skewness
+    - `\(&gt; \pm 2\)` is a sign of skewed data
 
+]]
 
----
-# Sknewness
+--
+
+.pull-right[
+.large[
+$$
+Skewness = \frac{N}{N - 2}\frac{\sum_{i=1}^n (X_i - \bar{X})^3}{(N - 1)s^3}
+$$
+
+- Interpreting skewness statistic
+    - positive value = positive (right) skew
+    - negative value = negative (left) skew
+    - zero value = no skew
+]]
+
+--
+
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 # Kurtosis
 
+$$
+Kurtosis = \frac{N(N+1)}{(N - 2)(N - 3)}\frac{\sum_{i=1}^n (X_i - \bar{X})^4}{(N - 1)s^4} - 3 \frac{(N - 1)(N - 1)}{(N - 2)(N - 3)}
+$$
 
+.pull-left[
+.large[
+- Degree of .dcoral[flatness] in distribution
+- Harder to detect visually
+- Kurtosis statistic
+    - Based on deviations from the mean (raised to 4th power)
+    - Divided by SE of kurtosis
+    - `\(&gt; \pm 2\)` is a sign of problems with kurtosis
+]]
+
+--
+
+.pull-right[
+.large[
+- Interpreting kurtosis statistic
+    - positive value = leptokurtic (peaked)
+    - negative value = platykurtic (flat)
+    - zero value = mesokurtic (normal)
+]]
 
 ---
+background-image: url(figures/fig_kurtosis.png)
+background-position: 50% 70%
+background-size: 1000px
+
+# Kurtosis
+
+---
+background-image: url(figures/fig_5numsummary1.pdf)
+background-position: 50% 70%
+background-size: 1000px
+
+# Five-Number Summary
+
+---
+background-image: url(figures/fig_5numbersummary2.pdf)
+background-position: 50% 70%
+background-size: 1000px
+
+# Five-Number Summary
+
+---
+background-image: url(figures/fig_5numbersummary3.pdf)
+background-position: 50% 70%
+background-size: 1000px
+
 # Five-Number Summary
 
 
+---
+background-image: url(figures/fig_boxplot.png)
+background-position: 50% 70%
+background-size: 700px
+
+# Boxplots (Modified)
+
 
 ---
-# Boxplots
+background-image: url(figures/fig_boxplot_hist.png)
+background-position: 50% 70%
+background-size: 1000px
 
-
-
----
 # Boxplot vs. Histogram
 
 
@@ -102,31 +257,27 @@ Example with a fulcrum
 ---
 # Boxplots by Group
 
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
 
 
 ---
 # Density Plots
 
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 # Quantile-Quantile (Q-Q) Plot
 
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 class: inverse, center, middle
 
-# Let's Apply This To the Inho Dataset
-
-
----
-background-image: url(figures/fig_inho_data_desc.png)
-background-position: 50% 80%
-background-size: 800px
-
-# Reminder
+# Let's Apply This To the Cancer Dataset &lt;br&gt; (on Canvas)
 
 
 ---
@@ -134,9 +285,11 @@ background-size: 800px
 
 
 ```r
-## Data is in .sav form (SPSS)
+library(tidyverse)
 library(haven)
-d &lt;- read_spss("Data/Ihno_dataset.sav")
+library(furniture)
+library(psych)
+cancer_raw &lt;- haven::read_spss("Cancer.sav")
 ```
 
 
@@ -146,13 +299,9 @@ d &lt;- read_spss("Data/Ihno_dataset.sav")
 
 
 ```r
-## install.packages("tidyverse")
-library(tidyverse)
-d_clean &lt;- d %&gt;%
-  mutate(Major = factor(Major, labels = c("Psychology", "Premed",
-                                          "Biology", "Sociology",
-                                          "Economics"))) %&gt;%
-  mutate(Coffee = factor(Coffee))
+cancer_clean &lt;- cancer_raw  %&gt;%
+  dplyr::rename_all(tolower) %&gt;%
+  dplyr::mutate(trtF = factor(trt, labels = c("control", "treatment")))
 ```
 
 ---
@@ -161,131 +310,191 @@ d_clean &lt;- d %&gt;%
 .pull-left[
 
 ```r
-library(furniture)
-tableF(d_clean, Major)
+cancer_clean %&gt;%
+  furniture::tableF(age, n = 10)
 ```
 
 ```
-## 
-## ─────────────────────────────────────────
-##  Major      Freq CumFreq Percent CumPerc
-##  Psychology 29   29      29.00%  29.00% 
-##  Premed     25   54      25.00%  54.00% 
-##  Biology    21   75      21.00%  75.00% 
-##  Sociology  15   90      15.00%  90.00% 
-##  Economics  10   100     10.00%  100.00%
-## ─────────────────────────────────────────
+
+──────────────────────────────────
+ age Freq CumFreq Percent CumPerc
+ 27  1    1       4.00%   4.00%  
+ 42  1    2       4.00%   8.00%  
+ 44  1    3       4.00%   12.00% 
+ 46  2    5       8.00%   20.00% 
+ 51  1    6       4.00%   24.00% 
+ ... ...  ...     ...     ...    
+ 67  3    19      12.00%  76.00% 
+ 68  1    20      4.00%   80.00% 
+ 69  1    21      4.00%   84.00% 
+ 73  1    22      4.00%   88.00% 
+ 77  2    24      8.00%   96.00% 
+ 86  1    25      4.00%   100.00%
+──────────────────────────────────
 ```
 ]
 
 .pull-right[
 
 ```r
-tableF(d_clean, Phobia)
+cancer_clean %&gt;%
+  furniture::tableF(trtF)
 ```
 
 ```
-## 
-## ─────────────────────────────────────
-##  Phobia Freq CumFreq Percent CumPerc
-##  0      12   12      12.00%  12.00% 
-##  1      15   27      15.00%  27.00% 
-##  2      12   39      12.00%  39.00% 
-##  3      16   55      16.00%  55.00% 
-##  4      21   76      21.00%  76.00% 
-##  5      11   87      11.00%  87.00% 
-##  6      1    88      1.00%   88.00% 
-##  7      4    92      4.00%   92.00% 
-##  8      4    96      4.00%   96.00% 
-##  9      1    97      1.00%   97.00% 
-##  10     3    100     3.00%   100.00%
-## ─────────────────────────────────────
+
+────────────────────────────────────────
+ trtF      Freq CumFreq Percent CumPerc
+ control   14   14      56.00%  56.00% 
+ treatment 11   25      44.00%  100.00%
+────────────────────────────────────────
 ```
 ]
 
 ---
-# Frequency Viz's
-
-.Huge[For viz's, we will use `ggplot2`]
-
-&lt;br&gt;
-
-.huge[This provides the most powerful, beautiful framework for data visualizations]
-
---
-
-.large[.large[
-- It is built on making .dcoral[layers]
-- Each plot has a .nicegreen["geom"] function
-    - e.g. `geom_bar()` for bar charts, `geom_histogram()` for histograms, etc.
-]]
-
-
----
-# Bar Charts
+### Frequency Tables with `psych` and `furniture::table1`
 
 
 ```r
-ggplot(d_clean, aes(x = Major)) +
-  geom_bar()
+cancer_clean %&gt;% 
+  dplyr::select(age, weighin, totalcin, totalcw2, totalcw4, totalcw6) %&gt;%
+  psych::describe()
 ```
 
-![](01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+```
+         vars  n   mean    sd median trimmed   mad min   max range  skew
+age         1 25  59.64 12.93   60.0   59.95 11.86  27  86.0  59.0 -0.31
+weighin     2 25 178.28 31.98  172.8  176.57 21.05 124 261.4 137.4  0.73
+totalcin    3 25   6.52  1.53    6.0    6.33  0.00   4  12.0   8.0  1.80
+totalcw2    4 25   8.28  2.54    8.0    8.10  2.97   4  16.0  12.0  1.01
+totalcw4    5 25  10.36  3.47   10.0   10.19  2.97   6  17.0  11.0  0.49
+totalcw6    6 23   9.48  3.49    9.0    9.21  2.97   3  19.0  16.0  0.77
+         kurtosis   se
+age         -0.01 2.59
+weighin      0.07 6.40
+totalcin     4.30 0.31
+totalcw2     1.14 0.51
+totalcw4    -1.00 0.69
+totalcw6     0.53 0.73
+```
 
 ---
-# Bar Charts
+### Frequency Tables with `psych` and `furniture::table1`
+
+.pull-left[
+
+```r
+cancer_clean %&gt;%
+  furniture::table1(trtF, age, weighin)
+```
+
+```
+
+────────────────────────────────
+              Mean/Count (SD/%)
+              n = 25           
+ trtF                          
+    control   14 (56%)         
+    treatment 11 (44%)         
+ age                           
+              59.6 (12.9)      
+ weighin                       
+              178.3 (32.0)     
+────────────────────────────────
+```
+]
+
+.pull-right[
+
+```r
+cancer_clean %&gt;%
+  dplyr::group_by(trtF) %&gt;%
+  furniture::table1(age, weighin)
+```
+
+```
+
+───────────────────────────────────
+                  trtF 
+         control      treatment   
+         n = 14       n = 11      
+ age                              
+         59.8 (9.0)   59.5 (17.2) 
+ weighin                          
+         167.5 (23.0) 192.0 (37.4)
+───────────────────────────────────
+```
+]
+
+---
+# Boxplots
 
 
 ```r
-ggplot(d_clean, aes(x = Coffee)) +
-  geom_bar()
+cancer_clean %&gt;%
+  ggplot(aes(x = "Full Data Set", 
+             y = age)) +
+  geom_boxplot()
 ```
 
-![](01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-# Histograms
+# Boxplots by groups
 
 
 ```r
-ggplot(d_clean, aes(x = Phobia)) +
-  geom_histogram(binwidth = 1)
+cancer_clean %&gt;%
+  ggplot(aes(x = trtF, 
+             y = age)) +
+  geom_boxplot()
 ```
 
-![](01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Boxplot for a Subset
+
+
+```r
+cancer_clean %&gt;%
+  dplyr::filter(weighin &lt; 172) %&gt;%
+  ggplot(aes(x = "Weigh At Baseline &lt; 172", 
+             y = age)) +
+  geom_boxplot()
+```
+
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Histograms (change bins to size 3)
 
 
 ```r
-ggplot(d_clean, aes(x = Phobia)) +
-  geom_histogram(binwidth = 3)
+cancer_clean %&gt;%
+  dplyr::filter(weighin &lt; 172) %&gt;%
+  ggplot(aes(x = trtF, 
+             y = age)) +
+  geom_boxplot()
 ```
 
-![](01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-# Histograms (change bins to size 5)
+# Boxplot for Repeated Measures
 
 
 ```r
-ggplot(d_clean, aes(x = Phobia)) +
-  geom_histogram(binwidth = 5)
+cancer_clean %&gt;%
+  tidyr::gather(key = "time", 
+                value = "value", 
+                totalcin, totalcw2, totalcw4, totalcw6) %&gt;%
+  ggplot(aes(x = time, 
+             y = value)) +
+  geom_boxplot()
 ```
 
-![](01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
-
----
-# Histograms
-
-
-```r
-ggplot(d_clean, aes(x = Mathquiz)) +
-  geom_histogram(binwidth = 4)
-```
-
-![](01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+&lt;img src="01_Ch3_CenterSpread_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -299,7 +508,7 @@ class: inverse, center, middle
 
 # Next Topic
 
-### Center and Spread
+### Standard and Normal
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

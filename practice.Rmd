@@ -1,5 +1,5 @@
 ---
-title: "My First RMarkdown"
+title: "Untitled"
 output: pdf_document
 ---
 
@@ -7,13 +7,36 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Homework 1
 
-**Answer**: Write your answer
+# Exploratory
 
-This is my first RMarkdown document.
+## Chapter 2. SOmething about chapter 2
+
+This is regular text.
+
+This is an equation $\sigma^2 = \sqrt{25/n}$ and its so cool.
+
+$$
+\sigma^2 = \frac{jim}{n- 1}
+$$
+
+(This is within some parenthases). 
+
+- This is item one
+- This is item two
+    - This is a subitem
+
+1. This is the first item
+2. This is the second item
+3. This is the third
 
 ```{r}
+
 plot(rnorm(100), rnorm(100))
+
 ```
+
+
+
+
 
