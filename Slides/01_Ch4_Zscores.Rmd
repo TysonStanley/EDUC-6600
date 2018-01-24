@@ -1,0 +1,324 @@
+---
+title: "Standard and Normal"
+subtitle: "Cohen Chapter 4 <br><br> .small[EDUC/PSY 6600]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: pres2.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment     = NA,
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE,
+                      fig.align   = "center",   # center all figures
+                      fig.width   = 8,          # set default figure width to 4 inches
+                      fig.height  = 5)        # set default figure height to 3 inches
+```
+
+class: center, middle
+
+## “How do all these unusuals strike you, Watson?” <br> “Their cumulative effect is certainly considerable, and yet each of them is quite possible in itself.”
+
+### -- Sherlock Holmes and Dr. Watson, *The Adventure of Abbey Grange*
+
+---
+# Exploring Quantitative Data
+
+### Building on what we've already discussed:
+
+.large[.large[
+1. Always plot your data: .dcoral[make a graph].
+2. Look for the overall pattern (.nicegreen[shape, center, and spread]) and for striking departures such as .nicegreen[outliers].
+3. Calculate a numerical summary to briefly .bluer[describe center and spread].
+4. Sometimes the overall pattern of a large number of observations is so regular that we can describe it by a smooth curve.
+]]
+
+---
+# Let's Start with Density Curves
+
+.huge[
+A .dcoral[density curve] is a curve that:
+]
+
+.large[.large[
+- is always on or above the horizontal axis
+- has an area of exactly 1 underneath it
+
+It describes the overall pattern of a distribution and highlights proportions of observations as the area.
+]]
+
+---
+background-image: url(figures/fig_density_normal1.png)
+background-position: 50% 70%
+background-size: 1200px
+
+# Density Curves and Normal Distributions
+
+---
+background-image: url(figures/fig_density_baseball.png)
+background-position: 50% 80%
+background-size: 950px
+
+---
+# Normal Distribution
+
+.pull-left[
+.large[.large[
+Many dependent variables are assumed to be normally distributed
+]
+
+- Many statistical procedures assume this
+    - Correlation, regression, t-tests, and ANOVA
+- Also called the Gaussian distribution
+    - for Karl Gauss
+]]
+
+.pull-right[
+```{r, echo=FALSE, fig.width = 5.5, fig.height=5}
+set.seed(2)
+library(tidyverse)
+data_frame(x = rnorm(1000)) %>%
+  ggplot(aes(x, ..density..)) +
+  geom_histogram(alpha = .5, color = "black", fill = "lightgrey") +
+  geom_density(size = 2, color = "black") +
+  anteo::theme_anteo_wh()
+```
+
+]
+
+---
+background-image: url(figures/fig_6895rule.png)
+background-position: 50% 70%
+background-size: 1100px
+
+---
+background-image: url(figures/fig_normal.png)
+background-position: 50% 70%
+background-size: 1100px
+
+
+---
+# Do We Have a Normal Distribution?
+
+--
+
+.huge[Check a Q-Q Plot! (Normal distribution will lie on the line)]
+
+```{r, echo=FALSE}
+set.seed(843)
+data_frame(x = rnorm(100)) %>%
+  ggplot(aes(sample = x)) +
+    geom_qq() +
+    geom_abline(slope = 1, intercept = 0) +
+    anteo::theme_anteo_wh()
+```
+
+
+---
+# Z-Scores
+
+$$
+z = \frac{X - \mu}{\sigma} = \frac{X - \bar{X}}{s}
+$$
+
+.pull-left[
+.huge[.dcoral[Standardizing]]
+
+.large[.large[
+Convert a value to a standard score ("z-score")
+
+- First subtract the mean
+- Then divide by the standard deviation
+]]
+]
+
+.pull-right[
+```{r, fig.width=6, fig.height=6, echo=FALSE}
+set.seed(843)
+df = data_frame(x  = rnorm(100, 110, 10.5)) %>%
+  mutate(xs = scale(x))
+p1 = ggplot(df,
+            aes(x = x)) +
+    geom_density(alpha = .5, fill = "chartreuse3", color = "chartreuse4") +
+    anteo::theme_anteo_wh() +
+  labs(x = "Original",
+       title = "Original Units")
+p2 = ggplot(df,
+            aes(x = xs)) +
+    geom_density(alpha = .5, fill = "dodgerblue3", color = "dodgerblue4") +
+    anteo::theme_anteo_wh() +
+  labs(x = "Standardized",
+       title = "Standardized")
+gridExtra::grid.arrange(p1, p2, ncol = 1)
+```
+
+]
+
+---
+# Z-Scores
+
+.huge[
+- z-scores are in .nicegreen[SD units]
+- Represent SD distances away from the mean (M = 0) 
+    - if z-score = -0.50 then it is $\frac{1}{2}$ of SD below mean
+- Can compare z-scores from 2 or more variables originally measured in differing units
+
+.dcoral[Note: Standardizing does NOT "normalize" the data]
+]
+
+---
+class: inverse, center, middle
+
+# Let's Apply This To the Cancer Dataset <br> (on Canvas)
+
+
+---
+# Read in the Data
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(haven)
+library(furniture)
+library(psych)
+cancer_raw <- haven::read_spss("Cancer.sav")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(psych)
+library(haven)
+library(tidyverse)
+library(furniture)
+cancer_raw <- read_spss("~/Dropbox/Teaching/EDUC 6600/Data/Cancer.sav")
+```
+
+--
+### And Clean It
+
+```{r, message=FALSE, warning=FALSE}
+cancer_clean <- cancer_raw  %>%
+  dplyr::rename_all(tolower) %>%
+  dplyr::mutate(trtF = factor(trt, labels = c("control", "treatment")))
+```
+
+---
+# Frequency Tables Review
+
+.pull-left[
+```{r, message=FALSE, warning=FALSE}
+cancer_clean %>%
+  furniture::tableF(age, n = 10)
+```
+]
+
+.pull-right[
+```{r, message=FALSE, warning=FALSE}
+cancer_clean %>%
+  furniture::tableF(trtF)
+```
+]
+
+---
+### Frequency Tables with `psych` and `furniture::table1`
+
+```{r}
+cancer_clean %>% 
+  dplyr::select(age, weighin, totalcin, totalcw2, totalcw4, totalcw6) %>%
+  psych::describe()
+```
+
+---
+### Frequency Tables with `psych` and `furniture::table1`
+
+.pull-left[
+```{r}
+cancer_clean %>%
+  furniture::table1(trtF, age, weighin)
+```
+]
+
+.pull-right[
+```{r}
+cancer_clean %>%
+  dplyr::group_by(trtF) %>%
+  furniture::table1(age, weighin)
+```
+]
+
+---
+# Boxplots
+
+```{r}
+cancer_clean %>%
+  ggplot(aes(x = "Full Data Set", 
+             y = age)) +
+  geom_boxplot()
+```
+
+---
+# Boxplots by groups
+
+```{r}
+cancer_clean %>%
+  ggplot(aes(x = trtF, 
+             y = age)) +
+  geom_boxplot()
+```
+
+---
+# Boxplot for a Subset
+
+```{r}
+cancer_clean %>%
+  dplyr::filter(weighin < 172) %>%
+  ggplot(aes(x = "Weigh At Baseline < 172", 
+             y = age)) +
+  geom_boxplot()
+```
+
+---
+# Histograms (change bins to size 3)
+
+```{r}
+cancer_clean %>%
+  dplyr::filter(weighin < 172) %>%
+  ggplot(aes(x = trtF, 
+             y = age)) +
+  geom_boxplot()
+```
+
+---
+# Boxplot for Repeated Measures
+
+```{r, fig.height = 4.5}
+cancer_clean %>%
+  tidyr::gather(key = "time", 
+                value = "value", 
+                totalcin, totalcw2, totalcw4, totalcw6) %>%
+  ggplot(aes(x = time, 
+             y = value)) +
+  geom_boxplot()
+```
+
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+
+---
+class: inverse, center, middle
+
+# Next Topic
+
+### Standard and Normal
+
+
