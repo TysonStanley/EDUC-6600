@@ -19,15 +19,16 @@ knitr::opts_chunk$set(comment     = NA,
                       warning     = FALSE, 
                       message     = FALSE,
                       fig.align   = "center",   # center all figures
-                      fig.width   = 8,          # set default figure width to 4 inches
-                      fig.height  = 5)        # set default figure height to 3 inches
+                      fig.width   = 6.5,          # set default figure width to 4 inches
+                      fig.height  = 4.5)        # set default figure height to 3 inches
 ```
 
 class: center, middle
 
-## “How do all these unusuals strike you, Watson?” <br> “Their cumulative effect is certainly considerable, and yet each of them is quite possible in itself.”
+## How do all these unusuals strike you, Watson? <br> Their cumulative effect is certainly considerable, and yet each of them is quite possible in itself.
 
-### -- Sherlock Holmes and Dr. Watson, *The Adventure of Abbey Grange*
+### -- Sherlock Holmes and Dr. Watson, 
+*The Adventure of Abbey Grange*
 
 ---
 # Exploring Quantitative Data
@@ -89,7 +90,7 @@ data_frame(x = rnorm(1000)) %>%
   ggplot(aes(x, ..density..)) +
   geom_histogram(alpha = .5, color = "black", fill = "lightgrey") +
   geom_density(size = 2, color = "black") +
-  anteo::theme_anteo_wh()
+  anteo::theme_anteo_wh(base_size = 18) 
 ```
 
 ]
@@ -118,16 +119,13 @@ data_frame(x = rnorm(100)) %>%
   ggplot(aes(sample = x)) +
     geom_qq() +
     geom_abline(slope = 1, intercept = 0) +
-    anteo::theme_anteo_wh()
+    anteo::theme_anteo_wh(base_size = 18)
 ```
 
 
 ---
 # Z-Scores
 
-$$
-z = \frac{X - \mu}{\sigma} = \frac{X - \bar{X}}{s}
-$$
 
 .pull-left[
 .huge[.dcoral[Standardizing]]
@@ -137,11 +135,17 @@ Convert a value to a standard score ("z-score")
 
 - First subtract the mean
 - Then divide by the standard deviation
+
+
+$$
+z = \frac{X - \mu}{\sigma} = \frac{X - \bar{X}}{s}
+$$
+
 ]]
 ]
 
 .pull-right[
-```{r, fig.width=6, fig.height=6, echo=FALSE}
+```{r, fig.width=6, fig.height=7, echo=FALSE}
 set.seed(843)
 df = data_frame(x  = rnorm(100, 110, 10.5)) %>%
   mutate(xs = scale(x))
@@ -156,7 +160,7 @@ p2 = ggplot(df,
     geom_density(alpha = .5, fill = "dodgerblue3", color = "dodgerblue4") +
     anteo::theme_anteo_wh() +
   labs(x = "Standardized",
-       title = "Standardized")
+       title = "Standardized Units")
 gridExtra::grid.arrange(p1, p2, ncol = 1)
 ```
 
@@ -177,56 +181,59 @@ gridExtra::grid.arrange(p1, p2, ncol = 1)
 ---
 class: inverse, center, middle
 
-# Let's Apply This To the Cancer Dataset <br> (on Canvas)
+# Let's Apply This To the Cancer Dataset 
 
 
 ---
 # Read in the Data
 
-```{r, eval=FALSE}
-library(tidyverse)
-library(haven)
-library(furniture)
-library(psych)
-cancer_raw <- haven::read_spss("Cancer.sav")
+```{r}
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(haven)        # Read in SPSS datasets
+library(furniture)    # Nice tables (by our own Tyson Barrett)
+library(psych)        # Lots of nice tid-bits
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(psych)
-library(haven)
-library(tidyverse)
-library(furniture)
-cancer_raw <- read_spss("~/Dropbox/Teaching/EDUC 6600/Data/Cancer.sav")
+```{r, eval=FALSE}
+cancer_raw <- haven::read_spss("cancer.sav")
+```
+
+```{r, include=FALSE}
+cancer_raw <- haven::read_spss("data/cancer.sav")
 ```
 
 --
 ### And Clean It
 
 ```{r, message=FALSE, warning=FALSE}
-cancer_clean <- cancer_raw  %>%
-  dplyr::rename_all(tolower) %>%
-  dplyr::mutate(trtF = factor(trt, labels = c("control", "treatment")))
+cancer_clean <- cancer_raw %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate(id = factor(id)) %>% 
+  dplyr::mutate(trt = factor(trt,
+                             labels = c("Placebo", 
+                                        "Aloe Juice"))) %>% 
+  dplyr::mutate(stage = factor(stage))
 ```
 
 ---
-# Frequency Tables Review
+## Frequency Tables with `furniture::tableF()`
 
 .pull-left[
 ```{r, message=FALSE, warning=FALSE}
 cancer_clean %>%
-  furniture::tableF(age, n = 10)
+  furniture::tableF(age, n = 8)
 ```
 ]
 
 .pull-right[
 ```{r, message=FALSE, warning=FALSE}
 cancer_clean %>%
-  furniture::tableF(trtF)
+  furniture::tableF(trt)
 ```
 ]
 
 ---
-### Frequency Tables with `psych` and `furniture::table1`
+## Extensive Descriptive Stats `psych:describe()`
 
 ```{r}
 cancer_clean %>% 
@@ -235,19 +242,21 @@ cancer_clean %>%
 ```
 
 ---
-### Frequency Tables with `psych` and `furniture::table1`
+## Smaller Set of Descriptive Stats `furniture::table1`
 
 .pull-left[
+For the Entire Sample
 ```{r}
 cancer_clean %>%
-  furniture::table1(trtF, age, weighin)
+  furniture::table1(trt, age, weighin)
 ```
 ]
 
 .pull-right[
+Breaking the Sample by a Factor
 ```{r}
 cancer_clean %>%
-  dplyr::group_by(trtF) %>%
+  dplyr::group_by(trt) %>%
   furniture::table1(age, weighin)
 ```
 ]
@@ -267,7 +276,7 @@ cancer_clean %>%
 
 ```{r}
 cancer_clean %>%
-  ggplot(aes(x = trtF, 
+  ggplot(aes(x = trt, 
              y = age)) +
   geom_boxplot()
 ```
@@ -289,7 +298,7 @@ cancer_clean %>%
 ```{r}
 cancer_clean %>%
   dplyr::filter(weighin < 172) %>%
-  ggplot(aes(x = trtF, 
+  ggplot(aes(x = trt, 
              y = age)) +
   geom_boxplot()
 ```
@@ -319,6 +328,8 @@ class: inverse, center, middle
 
 # Next Topic
 
-### Standard and Normal
+### Intro to Hypothesis TEsting: 1 Sample z-test
+
+(after Exam 1)
 
 
