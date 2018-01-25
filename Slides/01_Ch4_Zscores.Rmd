@@ -356,8 +356,6 @@ background-position: 50% 50%
 # The Central Limit Theorem
 
 ---
-background-image: url(figures/fig_clt_slide.png)
-background-position: 50% 50%
 
 # The Central Limit Theorem
 
