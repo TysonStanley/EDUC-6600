@@ -95,15 +95,16 @@ background-size: 1100px
 ---
 # Do We Have a Normal Distribution?
 
---
+.huge[Check Plot!]
 
-.huge[Check a Q-Q Plot! (Normal distribution will lie on the line)]
+.pull-left[Bell shaped curve?]
 
+.pull-right[Points on the line?]
 &lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
-# Z-Scores
+# Z-Scores, Computation
 
 
 .pull-left[
@@ -129,7 +130,7 @@ $$
 ]
 
 ---
-# Z-Scores
+# Z-Scores, Units
 
 .huge[
 - z-scores are in .nicegreen[SD units]
@@ -140,10 +141,209 @@ $$
 .dcoral[Note: Standardizing does NOT "normalize" the data]
 ]
 
+
 ---
 class: inverse, center, middle
 
-# Let's Apply This To the Cancer Dataset 
+# Let's Apply This to an Exmple Situation 
+
+---
+background-image: url(figures/fig_blank_normal_slide.png)
+background-position: 50% 80%
+background-size: 950px
+
+# Example: Draw a Picture
+
+.huge[95% of students at a school are betwee 1.1 and 1.7 meters tall
+]
+
+Assuming this data is .nicegreen[normally distributed], can you calculate the .dcoral[MEAN] and .dcoral[STANDARD DEVIATION]?
+
+
+---
+background-image: url(figures/fig_blank_normal_slide.png)
+background-position: 50% 80%
+background-size: 950px
+
+# Example: Calculate a z-Score
+
+.huge[You have a friend who is 1.85 meters tall.
+]
+
+.nicegreen[Class: M = 1.4 meters, SD = 0.15 meters]
+
+.dcoral[How far] is 1.85 from the mean?  How many .dcoral[standard deviations] is that?
+
+
+---
+background-image: url(figures/fig_z_table_top.png)
+background-position: 50% 50%
+background-size: 15 7
+
+# Using the z-Table
+
+---
+
+## Examples: Standardizing Scores
+
+Assume: School's population of students heights are .nicegreen[normal (M = 1.4m, SD = 0.15m)]
+
+1. The .dcoral[z-score] for a student 1.63 m tall = ______
+
+2. The .nicegreen[height] of a student with a z-socre of -2.65 = ______
+
+3. The .dcoral[Pecentile Rank] of a student that is 1.51 m tall = ______
+
+4. The .dcoral[90th percentile] for students heights = ______
+
+
+---
+background-image: url(figures/fig_3_blank_normal_slide.png)
+background-position: 50% 50%
+
+## Examples: Find the Probability That...
+
+Assume: School's population of students heights are .nicegreen[normal (M = 1.4m, SD = 0.15m)]
+
+(1) .dcoral[More than] 1.63 m tall    
+  
+(2) .dcoral[Less than] 1.2 m tall  
+  
+(3) .dcoral[betwee] 1.2 and 1.63 tall
+
+
+
+---
+background-image: url(figures/fig_2_blank_normal_slide.png)
+background-position: 50% 50%
+
+## Examples: Percentiles
+
+Assume: School's population of students heights are .nicegreen[normal (M = 1.4m, SD = 0.15m)]
+
+(1) The .dcoral[perentile rank] of a 1.7 m tall Student = ______
+  
+(2) The .dcoral[height] of a studnet in the 15th percentile = ______
+
+
+---
+
+class: inverse, center, middle
+
+# Into Theory Mode Again
+
+---
+background-image: url(figures/fig_pop_sample_slide.png)
+background-position: 50% 50%
+
+# Parameters vs. Statistics
+
+---
+
+# Statistical Estimation
+
+.large[
+- The process of .nicegreen[statistical inference] involves using information .dcoral[from a sample] to draw conclusions about a wider population.
+
+- Different random samples yield different statistics. We need to be able to describe the .dcoral[sampling distribution] of possible statistic values in order to perform .nicegreen[statistical inference].
+
+
+- We can think of a statistic as a .nicegreen[random variable] because it takes numerical values that describe the outcomes of the .dcoral[random sampling process].
+]
+
+---
+background-image: url(figures/fig_samp_dist_slide.png)
+background-position: 50% 50%
+
+# Sampling Distribution
+
+.large[
+The .dcoral[LAW of LARGE NUMBERS] assures us that if we measure .nicegreen[enough] subjects, the statistic .nicegreen[x-bar] will eventually get .dcoral[very close to] the unknown parameter .nicegreen[mu]. 
+
+If we took every one of the possible samples of a certain size, calculated the sample mean for each, and graphed all of those values, we'd have a .dcoral[sampling distribution].
+]
+
+---
+background-image: url(figures/fig_samp_dist_forMEAN_slide.png)
+background-position: 50% 50%
+
+# Sampling Distribution for the MEAN
+
+.large[
+The .dcoral[MEAN] of a sampling distribution .nicegreen[for a sample mean] is just as likely to be above or below the .dcoral[population mean], even if the distribution of the raw data is skewed. 
+
+
+The .dcoral[STANDARD DEVIATION] of a sampling distribution .nicegreen[for a sample mean] is is SMALLER than the standard deviation for the population by a factor of the .dcoral[square-root of n].
+]
+
+---
+background-image: url(figures/fig_all_samples_slide.png)
+background-position: 50% 50%
+
+# Normally Distributed Population
+
+.large[If the population is NORMALLY distributed:]
+
+
+
+---
+background-image: url(figures/fig_bank_calls_slide.png)
+background-position: 50% 50%
+
+## Skewed Population
+
+.pull-left[
+The distribution of lengths of .dcoral[all] customer service calls received by a bank in a month. 
+]
+
+.pull-right[
+The distribution of the .dcoral[sample means] (x-bar) for 500 random samples of size 80 from this population. The scales and histogram classes are exactly the same in both panels
+]
+
+
+---
+background-image: url(figures/fig_clt_slide.png)
+background-position: 50% 50%
+
+# The Central Limit Theorem
+
+---
+background-image: url(figures/fig_clt_slide.png)
+background-position: 50% 50%
+
+# The Central Limit Theorem
+
+.huge[
+When a sample size (n) is .nicegreen[large], the sampling distribution of the .dcoral[sample MEAN] is approximately normally distributed about the .nicegreen[mean of the population] with the stadard deviation less than than of the population by a factor of .nicegreen[the square root of n].
+]
+
+
+---
+class: inverse, center, middle
+
+# Back to the Example Situation
+
+
+
+---
+background-image: url(figures/fig_2_blank_normal_slide.png)
+background-position: 50% 50%
+
+## Examples: Probabilities
+
+Assume: School's population of students heights are .nicegreen[normal (M = 1.4m, SD = 0.15m)]
+
+(1) The .dcoral[probability] a randomly selected .nicegreen[student] is more than 1.63 m tall = ______
+  
+(2) The .dcoral[probability] a randomly selected .nicegreen[sample] of 16 students .nicegreen[average] more than 1.63 m tall = ______
+
+
+
+---
+
+class: inverse, center, middle
+
+# Let's Apply This to the Cancer Dataset 
 
 
 ---
@@ -179,30 +379,23 @@ cancer_clean &lt;- cancer_raw %&gt;%
 ```
 
 ---
-## Frequency Tables with `furniture::tableF()`
+## Standardize a variable with `scale()`
 
 .pull-left[
 
 ```r
 cancer_clean %&gt;%
-  furniture::tableF(age, n = 8)
+  furniture::table1(age)
 ```
 
 ```
 
-----------------------------------
- age Freq CumFreq Percent CumPerc
- 27  1    1       4.00%   4.00%  
- 42  1    2       4.00%   8.00%  
- 44  1    3       4.00%   12.00% 
- 46  2    5       8.00%   20.00% 
- ... ...  ...     ...     ...    
- 68  1    20      4.00%   80.00% 
- 69  1    21      4.00%   84.00% 
- 73  1    22      4.00%   88.00% 
- 77  2    24      8.00%   96.00% 
- 86  1    25      4.00%   100.00%
-----------------------------------
+-----------------------
+     Mean/Count (SD/%)
+     n = 25           
+ age                  
+     59.6 (12.9)      
+-----------------------
 ```
 ]
 
@@ -210,166 +403,61 @@ cancer_clean %&gt;%
 
 ```r
 cancer_clean %&gt;%
-  furniture::tableF(trt)
+  dplyr::mutate(agez = (age - 59.6) / 12.9) %&gt;% 
+  dplyr::mutate(ageZ = scale(age))%&gt;%
+  dplyr::select(id, trt, age, agez, ageZ) %&gt;% 
+  head()
 ```
 
 ```
-
------------------------------------------
- trt        Freq CumFreq Percent CumPerc
- Placebo    14   14      56.00%  56.00% 
- Aloe Juice 11   25      44.00%  100.00%
------------------------------------------
+# A tibble: 6 x 5
+  id    trt       age    agez    ageZ
+  &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 1     Placebo  52.0 -0.589  -0.591 
+2 5     Placebo  77.0  1.35    1.34  
+3 6     Placebo  60.0  0.0310  0.0278
+4 9     Placebo  61.0  0.109   0.105 
+5 11    Placebo  59.0 -0.0465 -0.0495
+6 15    Placebo  69.0  0.729   0.724 
 ```
 ]
 
 ---
-## Extensive Descriptive Stats `psych:describe()`
 
-
-```r
-cancer_clean %&gt;% 
-  dplyr::select(age, weighin, totalcin, totalcw2, totalcw4, totalcw6) %&gt;%
-  psych::describe()
-```
-
-```
-         vars  n   mean    sd median trimmed   mad min   max range  skew
-age         1 25  59.64 12.93   60.0   59.95 11.86  27  86.0  59.0 -0.31
-weighin     2 25 178.28 31.98  172.8  176.57 21.05 124 261.4 137.4  0.73
-totalcin    3 25   6.52  1.53    6.0    6.33  0.00   4  12.0   8.0  1.80
-totalcw2    4 25   8.28  2.54    8.0    8.10  2.97   4  16.0  12.0  1.01
-totalcw4    5 25  10.36  3.47   10.0   10.19  2.97   6  17.0  11.0  0.49
-totalcw6    6 23   9.48  3.49    9.0    9.21  2.97   3  19.0  16.0  0.77
-         kurtosis   se
-age         -0.01 2.59
-weighin      0.07 6.40
-totalcin     4.30 0.31
-totalcw2     1.14 0.51
-totalcw4    -1.00 0.69
-totalcw6     0.53 0.73
-```
-
----
-## Smaller Set of Descriptive Stats `furniture::table1`
+## Standardize a variable - not normal
 
 .pull-left[
-For the Entire Sample
 
 ```r
 cancer_clean %&gt;%
-  furniture::table1(trt, age, weighin)
+  dplyr::mutate(ageZ = scale(age)) %&gt;%
+  furniture::table1(age, ageZ)
 ```
 
 ```
 
----------------------------------
-               Mean/Count (SD/%)
-               n = 25           
- trt                            
-    Placebo    14 (56%)         
-    Aloe Juice 11 (44%)         
- age                            
-               59.6 (12.9)      
- weighin                        
-               178.3 (32.0)     
----------------------------------
+------------------------
+      Mean/Count (SD/%)
+      n = 25           
+ age                   
+      59.6 (12.9)      
+ ageZ                  
+      -0.0 (1.0)       
+------------------------
 ```
 ]
 
 .pull-right[
-Breaking the Sample by a Factor
 
 ```r
 cancer_clean %&gt;%
-  dplyr::group_by(trt) %&gt;%
-  furniture::table1(age, weighin)
+  dplyr::mutate(ageZ = scale(age)) %&gt;%
+  ggplot(aes(ageZ)) +
+  geom_histogram(bins = 14)
 ```
 
-```
-
------------------------------------
-                  trt 
-         Placebo      Aloe Juice  
-         n = 14       n = 11      
- age                              
-         59.8 (9.0)   59.5 (17.2) 
- weighin                          
-         167.5 (23.0) 192.0 (37.4)
------------------------------------
-```
+&lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 ]
-
----
-# Boxplots
-
-
-```r
-cancer_clean %&gt;%
-  ggplot(aes(x = "Full Data Set", 
-             y = age)) +
-  geom_boxplot()
-```
-
-&lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
-
----
-# Boxplots by groups
-
-
-```r
-cancer_clean %&gt;%
-  ggplot(aes(x = trt, 
-             y = age)) +
-  geom_boxplot()
-```
-
-&lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
-
----
-# Boxplot for a Subset
-
-
-```r
-cancer_clean %&gt;%
-  dplyr::filter(weighin &lt; 172) %&gt;%
-  ggplot(aes(x = "Weigh At Baseline &lt; 172", 
-             y = age)) +
-  geom_boxplot()
-```
-
-&lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
-
----
-# Histograms (change bins to size 3)
-
-
-```r
-cancer_clean %&gt;%
-  dplyr::filter(weighin &lt; 172) %&gt;%
-  ggplot(aes(x = trt, 
-             y = age)) +
-  geom_boxplot()
-```
-
-&lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
-
----
-# Boxplot for Repeated Measures
-
-
-```r
-cancer_clean %&gt;%
-  tidyr::gather(key = "time", 
-                value = "value", 
-                totalcin, totalcw2, totalcw4, totalcw6) %&gt;%
-  ggplot(aes(x = time, 
-             y = value)) +
-  geom_boxplot()
-```
-
-&lt;img src="01_Ch4_Zscores_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
-
 
 ---
 class: inverse, center, middle
@@ -382,9 +470,9 @@ class: inverse, center, middle
 
 # Next Topic
 
-### Intro to Hypothesis TEsting: 1 Sample z-test
+### Intro to Hypothesis Testing: 1 Sample z-test
 
-(after Exam 1)
+-- after Exam 1 --
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

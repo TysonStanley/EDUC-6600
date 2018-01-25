@@ -74,8 +74,8 @@ background-size: 1000px
 
 .pull-left[
 .large[
-- The Median is “resistant” & doesn’t change much
-- The Mean is “influenced” & changes more!
+- The MEDIAN is **resistant** & doesn't change much
+- The MEAN is **influenced** & changes more!
 - Average does NOT mean typical
 - Average moves when we remove the high point
 ]]
@@ -83,7 +83,7 @@ background-size: 1000px
 --
 
 .pull-right[
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, fig.height=7}
 set.seed(1)
 library(tidyverse)
 x = data_frame(
@@ -96,7 +96,8 @@ p1 = ggplot(x, aes(x, fill = cols)) +
                      guide = FALSE) +
     geom_vline(xintercept = mean(x$x), color = "black") +
     annotate("text", x = mean(x$x) + .1, y = 4, label = "Mean",
-             hjust = 0, color = "black")
+             hjust = 0, color = "black") +
+  theme_bw(base_size = 18)
 p2 = x %>%
   filter(x != 6) %>%
   ggplot(aes(x, fill = cols)) +
@@ -110,7 +111,8 @@ p2 = x %>%
     annotate("text", x = mean(x %>%
                                 filter(x != 6) %>%
                                 pull(x)) + .1, y = 3, label = "Mean",
-             hjust = 0, color = "black")
+             hjust = 0, color = "black") +
+  theme_bw(base_size = 18)
 gridExtra::grid.arrange(p1, p2)
 ```
 ]
@@ -120,8 +122,8 @@ gridExtra::grid.arrange(p1, p2)
 
 .pull-left[
 .large[
-- The Median is “resistant” & doesn’t change much
-- The Mean is “influenced” & changes more!
+- The MEDIAN is **resistant** & doesn't change much
+- The MEAN is **influenced** & changes more!
 - Average does NOT mean typical
 - Average moves when we remove the high point
 - Median doesn't move when we remove the high point
@@ -130,7 +132,7 @@ gridExtra::grid.arrange(p1, p2)
 --
 
 .pull-right[
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, , fig.height=7}
 set.seed(1)
 library(tidyverse)
 x = data_frame(
@@ -143,7 +145,8 @@ p1 = ggplot(x, aes(x, fill = cols)) +
                      guide = FALSE) +
     geom_vline(xintercept = median(x$x), color = "black") +
     annotate("text", x = median(x$x) + .1, y = 4, label = "Median",
-             hjust = 0, color = "black")
+             hjust = 0, color = "black") +
+  theme_bw(base_size = 18)
 p2 = x %>%
   filter(x != 6) %>%
   ggplot(aes(x, fill = cols)) +
@@ -157,7 +160,8 @@ p2 = x %>%
     annotate("text", x = median(x %>%
                                 filter(x != 6) %>%
                                 pull(x)) + .1, y = 3, label = "Median",
-             hjust = 0, color = "black")
+             hjust = 0, color = "black") +
+  theme_bw(base_size = 18)
 gridExtra::grid.arrange(p1, p2)
 ```
 ]
@@ -257,7 +261,8 @@ ggplot(x, aes(value, fill = skew, color = skew)) +
   scale_color_manual(values = c("dodgerblue4", "chartreuse4", "coral3"),
                      guide = FALSE) +
   anteo::theme_anteo_wh() +
-  theme(panel.spacing = unit(.2, "cm"))
+  theme(panel.spacing = unit(.2, "cm")) +
+  theme_bw(base_size = 18)
 
 ```
 
@@ -298,45 +303,35 @@ background-size: 1000px
 # Kurtosis
 
 ---
-background-image: url(figures/fig_5sum2.png)
-background-position: 50% 70%
-background-size: 1000px
+background-image: url(figures/fig_5sum_2.png)
+background-position: 50% 50%
 
 # Five-Number Summary
-## Example Data
 
 ---
-background-image: url(figures/fig_5sum3.png)
-background-position: 50% 70%
-background-size: 1000px
+background-image: url(figures/fig_5sum_3.png)
+background-position: 50% 50%
 
-# Five-Number Summary
-## Min/Max & Median
+# Five-Number Summary - Median
 
 ---
-background-image: url(figures/fig_5sum4.png)
-background-position: 50% 70%
-background-size: 1000px
+background-image: url(figures/fig_5sum_4.png)
+background-position: 50% 50%
 
-# Five-Number Summary
-## Quartiles
+# Five-Number Summary - Quartiles
 
 
 ---
-background-image: url(figures/fig_5sum5.png)
-background-position: 50% 70%
-background-size: 700px
+background-image: url(figures/fig_5sum_5.png)
+background-position: 50%50%
 
-# Boxplots (Modified)
-## Main Lines
+# Boxplots (Modified) - Lines
 
 ---
-background-image: url(figures/fig_5sum6.png)
-background-position: 50% 70%
-background-size: 700px
+background-image: url(figures/fig_5sum_6.png)
+background-position: 50% 50%
 
-# Boxplots (Modified)
-## Connections
+# Boxplots (Modified) - IQR and SIQR
 
 
 
@@ -347,7 +342,6 @@ background-size: 1000px
 
 # Boxplot vs. Histogram
 
----
 
 
 ---
@@ -360,13 +354,13 @@ data_frame(
   treatment = ifelse(group == 0, rnorm(25, -1, 2), rnorm(25, 1, 1.5))
 ) %>%
   mutate(group = factor(group, labels = c("Placebo", "Treatment"))) %>%
-  ggplot(aes(x = group, y = treatment, group = group, color = group)) +
-    geom_boxplot() +
+  ggplot(aes(x = group, y = treatment, group = group, fill = group)) +
+    geom_boxplot(alpha = .7) +
     labs(x = "Group",
          y = "Test Score") +
     scale_color_manual(values = c("chartreuse3", "coral2"),
                        guide = FALSE) +
-    anteo::theme_anteo_wh()
+    anteo::theme_anteo_wh(base_size = 18)
 ```
 
 
@@ -389,7 +383,7 @@ p1 = ggplot(y,
          title = "Density") +
     scale_color_manual(values = c("chartreuse3", "coral2"),
                        guide = FALSE) +
-    anteo::theme_anteo_wh()
+    anteo::theme_anteo_wh(base_size = 18)
 p2 = ggplot(y, aes(x = treatment, group = group, fill = group)) +
     geom_density(alpha = .5) +
     labs(x = "Group",
@@ -397,7 +391,7 @@ p2 = ggplot(y, aes(x = treatment, group = group, fill = group)) +
          title = "Density by Group") +
     scale_fill_manual(values = c("chartreuse3", "coral2"),
                        guide = FALSE) +
-    anteo::theme_anteo_wh()
+    anteo::theme_anteo_wh(base_size = 18)
 gridExtra::grid.arrange(p1, p2, ncol = 2)
 ```
 
@@ -410,7 +404,7 @@ data_frame(x = rnorm(50)) %>%
   ggplot(aes(sample = x)) +
     geom_qq() +
     geom_abline(slope = 1, intercept = 0) +
-    anteo::theme_anteo_wh()
+    anteo::theme_anteo_wh(base_size = 18)
 ```
 
 
