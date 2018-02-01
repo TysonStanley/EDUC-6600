@@ -46,6 +46,7 @@ Comparing group means, counts, or proportions
 - `\(\chi^2\)` tests]
 ]
 
+--
 
 .pull-right[
 .center[
@@ -75,6 +76,8 @@ Testing the association or dependence
 - How **precise** is sample mean or does it differ from a given value?
 - Are there between or within **group differences** or **associations**?
 ]
+
+--
 
 .pull-right[
 ### Goals of inferential statistics
@@ -110,6 +113,8 @@ background-image: url(figures/fig_old_cig.png)
 - Specificity
 - Prevention
 
+--
+
 .large[.dcoral[**Causality** is often a **judgmental** evaluation &lt;br&gt; of **combined** results from **several studies**]] 
 
 
@@ -137,18 +142,24 @@ background-image: url(figures/fig_yellow_box_1.png)
 .pull-left[
 1. State the .nicegreen[Hypotheses] 
   - Null &amp; Alternative
+  &lt;br&gt;&lt;br&gt;
 2. Select the .nicegreen[Statistical Test] &amp; .nicegreen[Significance Level] 
   - `\(\alpha\)` level
   - One vs. Two tails
+  &lt;br&gt;&lt;br&gt;
 3. Select random sample and collect data
+  &lt;br&gt;&lt;br&gt;
 4. Find the .nicegreen[Region of Rejection]
   - Based on `\(\alpha\)` &amp; # of tails
+  &lt;br&gt;&lt;br&gt;
 4. Calculate the .nicegreen[Test Statistic]
   - Examples include: `\(z, t, F, \chi^2\)`
+  &lt;br&gt;&lt;br&gt;
 5. Write the .nicegreen[Conclusion]
   - Statistical decision must by in context!
 ]
 
+--
 
 .pull-right[
 ## Definition of a p-value:
@@ -220,11 +231,15 @@ The .dcoral[NULL] hypothesis is .dcoral[TRUE] in the .dcoral[POPULATION]
 
 - Always base calculations on the NULL value(s)
 
+
+
 .nicegreen[.large[IF:] 
 
 The p-value is very **SMALL**]
 
 - How small?  If `\(p-value \lt \alpha\)`
+
+
 
 .nicegreen[.large[THEN:] 
 
@@ -233,6 +248,8 @@ We have evidence AGAINST the NULL hypothesis]
 - It is **UNLIKELY** we would have observed a sample that extreme **JUST DUE TO RANDOM CHANCE**...
 
 ]
+
+--
 
 .pull-right[
 .large[Criteria:] 
@@ -253,6 +270,357 @@ We NEVER **ACCEPT** &lt;br&gt; the **ALTERNATIVE** hypothesis!!!
 ]]]
 
 ]
+
+
+
+
+---
+# ONE tail or TWO?
+
+
+.pull-left[
+1-tailed test suggests a directionality in results
+H1: µ1 &lt; µ2 
+H1: µ1 &gt; µ2
+
+Rejection region collapsed into 1 end of sampling distribution
+e.g., a = 5% in one tail
+
+No computational differences for test statistics
+… ONLY the p-level differs …
+1-tailed, p of event or more extreme event in one tail
+2-tailed, p of event or more extreme event in both tails
+p from 1-tailed*2 (2-sided: p = .06, 1-sided: p = .03)
+
+]
+
+--
+
+.pull-right[
+
+Some circumstances may warrant a 1-tailed test, BUT...
+
+We generally **prefer** and default to a 2-tailed test!!!
+
+.large[More conservative]
+Rejection region is distributed in both tails
+- e.g.: `\(\alpha = .05\)` distributed across both tails 
+  - (2.5% in each tail)
+
+- If we know outcome, why do study?
+  - Looks suspicious to reviewer’s…
+  - “significant results at all costs!”
+
+--
+
+Cheating to run results then decide? **Yes!** `\(\alpha = .075%\)`
+
+Can’t flip coin, say it will land on tails, then lands on heads, and switch and say that it will land on heads
+
+]
+
+
+
+---
+# Choosing Alpha
+
+.pull-left[
+
+.dcoral[**Alpha**  = probability of making a **type I error**]
+
+.large[.dcoral[type I error]]
+- We reject the NULL when we should not
+- The risk of “false positive” results
+
+
+.large[.dcoral[type II error]]
+- We FAIL to reject the NULL when we should
+- The risk of “false negative” results
+
+]
+
+--
+
+.pull-right[
+
+We want `\(\alpha\)` to be .nicegreen[SMALL], but…we can’t just make too tiny, since the trade off is increasing the type II error rate
+
+.nicegreen[DEFAULT] is `\(\alpha = .05\)` (5% = 1 in 20 &amp; seems *‘rare’* to humans) **BUT** there is nothing magical about it
+
+Let it be .nicegreen[LARGER] value, `\(\alpha = .10\)`, **IF** we’d rather not miss any potential relationship and are okay with some false positives
+  - Ex) screening genes, early drug investigation, pilot study
+  
+Set it .nicegreen[SMALLER], `\(\alpha = .01\)`, **IF** false positives are costly and we want to be more stringent
+  - Ex) changing a national policy, mortgaging the farm
+
+]
+
+
+---
+# Assumptions of a 1-sample z-test
+
+### Sample was drawn at random (at least as representative as possible)
+- Nothing can be done to fix NON-representative samples!
+- Can not statistically test
+
+--
+
+### SD of the sampled population = SD of the comparison population
+- Very hard to check
+- Can not statistically test
+
+--
+
+### Variables have a normal distribution
+- Not as important if the sample is large (Central Limit Theorem)
+- IF the sample is far from normal &amp;/or small n, might want to transform variables
+  - Look at plots: histogram, boxplot, &amp; QQ plot (straight 45º line)
+  - Skewness &amp; Kurtosis: Divided value by its SE &amp; &gt; ± 2 indicates issues
+  - Shapiro-Wilks test (small N): p &lt; .05 ??? not normal
+  - Kolmogorov-Smirnov test (large N)
+  
+  
+  
+  
+---
+# APA: results of a 1-sample z-test
+
+- State the alpha &amp; number of tails prior to any results
+
+- Report exact p-values (usually 2 decimal places), except for “p &lt; .001”
+
+
+--
+
+### Example Sentence:
+
+A one sample z test showed that the difference in the quiz scores between the current sample (N = 9, M = 7.00, SD = 1.23) and the hypothesized value (6.000) were statistically significant, z = 2.45, p = .040.
+
+
+
+
+
+---
+# EXAMPLE: 1-sample z-test
+
+After an earthquake hits their town, a random sample of townspeople yields the following anxiety score:  
+
+.center[.nicegreen[72, 59, 54, 56, 48, 52, 57, 51, 64, 67]]
+
+Assume the general population has an anxiety scale that is expressed as a T score, so that `\(\mu = 50\)` and  `\(\sigma = 10\)`.  
+
+
+
+
+
+---
+# Cautions About Significance Tests
+
+### What statistical significance does not mean…
+
+Statistical significance only says whether the effect observed is likely to be due to chance alone because of random sampling.
+
+Statistical significance may not be practically important. That’s because statistical significance doesn’t tell you about the magnitude of the effect, only that there is one. 
+
+An effect could be too small to be relevant. And with a large enough sample size, significance can be reached even for the tiniest effect.
+
+A drug to lower temperature is found to reproducibly lower patient temperature by 0.4°Celsius (P-value &lt; 0.01). But clinical benefits of temperature reduction only appear for a 1°decrease or larger. 
+
+.center[ .dcoral[ STATISTICAL significance does NOT mean PRACTICAL significance!!!]]
+
+
+
+
+---
+# Cautions About Significance Tests
+
+### Don’t ignore lack of significance
+
+Consider this provocative title from the British Medical Journal: “Absence of evidence is not evidence of absence.”
+
+Having no proof of who committed a murder does not imply that the murder was not committed. 
+
+Indeed, failing to find statistical significance in results is not rejecting the null hypothesis. This is very different from actually accepting it. The sample size, for instance, could be too small to overcome large variability in the population.
+
+When comparing two populations, lack of significance does NOT imply that the two samples come from the same population. They could represent two very distinct populations with similar mathematical properties.
+
+
+
+---
+class: inverse, center, middle
+
+# Let's Apply This to the Cancer Dataset 
+
+
+---
+# Read in the Data
+
+
+```r
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(haven)        # Read in SPSS datasets
+library(psych)        # Lots of nice tid-bits
+library(car)          # Companion to "Applied Regression"
+```
+
+
+```r
+cancer_raw &lt;- haven::read_spss("cancer.sav")
+```
+
+
+
+--
+### And Clean It
+
+
+```r
+cancer_clean &lt;- cancer_raw %&gt;% 
+  dplyr::rename_all(tolower) %&gt;% 
+  dplyr::mutate(id = factor(id)) %&gt;% 
+  dplyr::mutate(trt = factor(trt,
+                             labels = c("Placebo", 
+                                        "Aloe Juice"))) %&gt;% 
+  dplyr::mutate(stage = factor(stage))
+```
+
+---
+# Descriptive Statistics
+
+
+### Skewness &amp; Kurtosis
+
+
+```r
+cancer_clean %&gt;% 
+  dplyr::select(age, totalcw4) %&gt;% 
+  psych::describe()
+```
+
+```
+         vars  n  mean    sd median trimmed   mad min max range  skew
+age         1 25 59.64 12.93     60   59.95 11.86  27  86    59 -0.31
+totalcw4    2 25 10.36  3.47     10   10.19  2.97   6  17    11  0.49
+         kurtosis   se
+age         -0.01 2.59
+totalcw4    -1.00 0.69
+```
+
+
+---
+#  Tests for Normaility - Shapiro-Wilks
+
+.pull-left[
+
+```r
+cancer_clean %&gt;% 
+  dplyr::pull(age) %&gt;% 
+  shapiro.test()
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  .
+W = 0.98317, p-value = 0.9399
+```
+]
+
+.pull-right[
+
+```r
+cancer_clean %&gt;% 
+  dplyr::pull(totalcw4) %&gt;% 
+  shapiro.test()
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  .
+W = 0.9131, p-value = 0.03575
+```
+]
+
+
+---
+# Plots to Check for Normaility - Age
+
+.pull-left[
+### Histogram
+
+```r
+cancer_clean %&gt;% 
+  ggplot(aes(age)) +
+  geom_histogram(binwidth = 5)
+```
+
+&lt;img src="01_Ch5_HypoTest_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+### Q-Q Plot
+
+```r
+cancer_clean %&gt;% 
+  ggplot(aes(sample = age)) +
+  geom_qq()
+```
+
+&lt;img src="01_Ch5_HypoTest_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+---
+# Plots to Check for Normaility - Week 4
+
+.pull-left[
+### Histogram
+
+```r
+cancer_clean %&gt;% 
+  ggplot(aes(totalcw4)) +
+  geom_histogram(binwidth = 1)
+```
+
+&lt;img src="01_Ch5_HypoTest_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+.pull-right[
+### Q-Q Plot
+
+```r
+cancer_clean %&gt;% 
+  ggplot(aes(sample = totalcw4)) +
+  geom_qq()
+```
+
+&lt;img src="01_Ch5_HypoTest_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+
+---
+class: inverse, center, middle
+
+# Next Topic
+
+### Confidence Interval Estimation &amp; &lt;br&gt; The t-Distribution
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
