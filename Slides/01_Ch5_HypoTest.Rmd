@@ -232,11 +232,9 @@ Judgment suspended until further evidence evaluated:
 
 .pull-left[
 
-.large[Assumption:] 
+.large[**Assumption:**] 
 
 The .dcoral[NULL] hypothesis is .dcoral[TRUE] in the .dcoral[POPULATION]
-
-- Always base calculations on the NULL value(s)
 
 
 
@@ -244,7 +242,8 @@ The .dcoral[NULL] hypothesis is .dcoral[TRUE] in the .dcoral[POPULATION]
 
 The p-value is very **SMALL**]
 
-- How small?  If $p-value \lt \alpha$
+- How small?
+$p-value \lt \alpha$
 
 
 
@@ -259,7 +258,7 @@ We have evidence AGAINST the NULL hypothesis]
 --
 
 .pull-right[
-.large[Criteria:] 
+.large[**Criteria:**] 
 
 May judge by either...
 - the p-value $\lt \alpha$   
@@ -268,7 +267,7 @@ May judge by either...
 
 
 
-.large[Conclusion:]
+.large[**Conclusion:**]
 
 We either **REJECT** or **FAIL TO REJECT** the .nicegreen[Null] hypothesis 
 
@@ -282,71 +281,81 @@ We NEVER **ACCEPT** <br> the **ALTERNATIVE** hypothesis!!!
 
 
 ---
+background-image: url(figures/fig_1or2_tails.png)
+
 # ONE tail or TWO?
 
-
 .pull-left[
-1-tailed test suggests a directionality in results
-H1: µ1 < µ2 
-H1: µ1 > µ2
+.large[**2-tailed test**]
 
-Rejection region collapsed into 1 end of sampling distribution
-e.g., a = 5% in one tail
+$H_1: \mu_1 \ne \mu_2$
 
-No computational differences for test statistics
-… ONLY the p-level differs …
-1-tailed, p of event or more extreme event in one tail
-2-tailed, p of event or more extreme event in both tails
-p from 1-tailed*2 (2-sided: p = .06, 1-sided: p = .03)
+.large[**1-tailed test**]
+
+.nicegreen[**Suggests a directionality in results!**] 
+
+$H_1: \mu_1 \lt \mu_2$ -OR- $H_1: \mu_1 \gt \mu_2$
+
+.large[**NO computational differences**]
+
+ONLY the $p-value$ differs:
+
+$2 \; tail \; p-value = \mathbf{2 \times} 1 \; tail \; p-value$
+
+- IF: 1-sided: $p = .03$
+- THEN: 2-sided: $p = .06$
 
 ]
 
---
+---
+background-image: url(figures/fig_1tail_cv.png)
+
+# ONE tail or TWO?
+
+.large[ .large[ .center[ .dcoral[Some circumstances may warrant a 1-tailed test, BUT... <br>We generally **prefer** and default to a 2-tailed test!!!]]]]
+
 
 .pull-right[
+.large[**More conservative = 2 tails**]<br>
 
-Some circumstances may warrant a 1-tailed test, BUT...
-
-We generally **prefer** and default to a 2-tailed test!!!
-
-.large[More conservative]
 Rejection region is distributed in both tails
+
 - e.g.: $\alpha = .05$ distributed across both tails 
   - (2.5% in each tail)
 
 - If we know outcome, why do study?
   - Looks suspicious to reviewer’s…
   - “significant results at all costs!”
-
---
-
-Cheating to run results then decide? **Yes!** $\alpha = .075%$
-
-Can’t flip coin, say it will land on tails, then lands on heads, and switch and say that it will land on heads
-
 ]
 
 
 
 ---
+background-image: url(figures/fig_err_types.png)
+
 # Choosing Alpha
 
 .pull-left[
 
 .dcoral[**Alpha**  = probability of making a **type I error**]
 
-.large[.dcoral[type I error]]
+.large[.dcoral[**type I error**]]
 - We reject the NULL when we should not
 - The risk of “false positive” results
 
 
-.large[.dcoral[type II error]]
+
+.large[.dcoral[**type II error**]]
 - We FAIL to reject the NULL when we should
 - The risk of “false negative” results
 
 ]
 
---
+
+---
+background-image: url(figures/fig_conf_matrix.png)
+
+# Choosing Alpha
 
 .pull-right[
 
@@ -366,24 +375,27 @@ Set it .nicegreen[SMALLER], $\alpha = .01$, **IF** false positives are costly an
 ---
 # Assumptions of a 1-sample z-test
 
-### Sample was drawn at random (at least as representative as possible)
+.large[**Sample was drawn at .dcoral[random] (at least as representative as possible)**] <br>
+
 - Nothing can be done to fix NON-representative samples!
 - Can not statistically test
 
 --
 
-### SD of the sampled population = SD of the comparison population
+.large[**.dcoral[SD] of the sampled population = .dcoral[SD] of the comparison population**] <br>
+
 - Very hard to check
 - Can not statistically test
 
 --
 
-### Variables have a normal distribution
+.large[**Variables have a .dcoral[normal] distribution**] <br>
+
 - Not as important if the sample is large (Central Limit Theorem)
 - IF the sample is far from normal &/or small n, might want to transform variables
-  - Look at plots: histogram, boxplot, & QQ plot (straight 45º line)
+  - Look at plots: .dcoral[histogram, boxplot, & QQ plot] (straight 45º line)
   - Skewness & Kurtosis: Divided value by its SE & > ± 2 indicates issues
-  - Shapiro-Wilks test (small N): p < .05 ??? not normal
+  - .dcoral[Shapiro-Wilks] test (small N): p < .05 ??? not normal
   - Kolmogorov-Smirnov test (large N)
   
   
@@ -416,6 +428,22 @@ After an earthquake hits their town, a random sample of townspeople yields the f
 
 Assume the general population has an anxiety scale that is expressed as a T score, so that $\mu = 50$ and  $\sigma = 10$.  
 
+---
+background-image: url(figures/fig_ztest_a.png)
+
+# EXAMPLE: 1-sample z-test
+
+After an earthquake hits their town, a random sample of townspeople yields the following anxiety score:  
+
+.center[.nicegreen[72, 59, 54, 56, 48, 52, 57, 51, 64, 67]]
+
+Assume the general population has an anxiety scale that is expressed as a T score, so that $\mu = 50$ and  $\sigma = 10$.  
+
+
+---
+background-image: url(figures/fig_ztest_2.png)
+
+
 
 
 
@@ -423,17 +451,22 @@ Assume the general population has an anxiety scale that is expressed as a T scor
 ---
 # Cautions About Significance Tests
 
-### What statistical significance does not mean…
+.large[**Statistical significance**]
 
-Statistical significance only says whether the effect observed is likely to be due to chance alone because of random sampling.
+- only says whether the effect observed is likely to be .nicegreen[due to chance] alone, because of random sampling
 
-Statistical significance may not be practically important. That’s because statistical significance doesn’t tell you about the magnitude of the effect, only that there is one. 
+- may not be .nicegreen[practically important]
 
-An effect could be too small to be relevant. And with a large enough sample size, significance can be reached even for the tiniest effect.
+That’s because *statistical* significance doesn’t tell you about the .nicegreen[**magnitude of the effect**], only that there **is** one. 
 
-A drug to lower temperature is found to reproducibly lower patient temperature by 0.4°Celsius (P-value < 0.01). But clinical benefits of temperature reduction only appear for a 1°decrease or larger. 
 
-.center[ .dcoral[ STATISTICAL significance does NOT mean PRACTICAL significance!!!]]
+An *effect* could be too small to be .nicegreen[**relevant**].  <br><br>
+
+And with a large enough sample size, significance can be reached even for the tiniest effect.
+<br><br>
+- EX) A drug to lower temperature is found to reproducibly lower patient temperature by 0.4°Celsius, $p \lt 0.01$. But clinical benefits of temperature reduction only appear for a 1°decrease or larger. 
+
+.large[ .center[ .dcoral[**STATISTICAL significance does NOT mean PRACTICAL significance!!!**]]]
 
 
 
@@ -443,11 +476,11 @@ A drug to lower temperature is found to reproducibly lower patient temperature b
 
 ### Don’t ignore lack of significance
 
-Consider this provocative title from the British Medical Journal: “Absence of evidence is not evidence of absence.”
+.center[.large[.dcoral[**“Absence of evidence is not evidence of absence.”**]]]
 
-Having no proof of who committed a murder does not imply that the murder was not committed. 
+.nicegreen[.center[Having no proof of who committed a murder <br> does not imply that the murder was not committed. ]]
 
-Indeed, failing to find statistical significance in results is not rejecting the null hypothesis. This is very different from actually accepting it. The sample size, for instance, could be too small to overcome large variability in the population.
+Indeed, failing to find statistical significance in results is *not* rejecting the null hypothesis. This is very different from actually accepting it. The sample size, for instance, could be too small to overcome large variability in the population.
 
 When comparing two populations, lack of significance does NOT imply that the two samples come from the same population. They could represent two very distinct populations with similar mathematical properties.
 
