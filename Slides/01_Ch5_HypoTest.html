@@ -19,11 +19,11 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 
-## "I’m afraid that I rather &lt;br&gt; give myself away  when I explain,”  &lt;br&gt; said he. &lt;br&gt; “Results without causes &lt;br&gt; are much more impressive.”
+## "I'm afraid that I rather &lt;br&gt; give myself away when I explain,' &lt;br&gt; said he. &lt;br&gt; 'Results without causes &lt;br&gt; are much more impressive.'
 
 
 ### -- Sherlock Holmes 
-*The Stock-Broker’s Cat*
+*The Stock-Broker's Cat*
 
 
 
@@ -106,7 +106,7 @@ background-image: url(figures/fig_old_cig.png)
 
 
 - Phenomenological (educational, behavioral, biological) credibility
-- Strength of association – ruling out occurrence by chance alone
+- Strength of association -- ruling out occurrence by chance alone
 - Consistency with past research findings
 - Temporality
 - Dose-response relationship
@@ -165,7 +165,7 @@ background-image: url(figures/fig_yellow_box_1.png)
 ## Definition of a p-value:
 
 .center[.large[ .large[
-The probability of observing &lt;br&gt; a test statistic &lt;br&gt; .dcoral[**“as extreme or more extreme”**] &lt;br&gt; .nicegreen[**IF**] &lt;br&gt; the NULL hypothesis is true.
+The probability of observing &lt;br&gt; a test statistic &lt;br&gt; .dcoral[**'as extreme or more extreme'**] &lt;br&gt; .nicegreen[**IF**] &lt;br&gt; the NULL hypothesis is true.
 ]]]]
 
 
@@ -206,14 +206,15 @@ background-image: url(figures/fig_scale_null.png)
 
 # Innocent Until Proven Guilty
 
-**IF** there is Not enough statistical evidence to reject…
+.large[
+**IF** there is Not enough statistical evidence to reject?
 
 Judgment suspended until further evidence evaluated:
 
-- “Inconclusive”
+- Inconclusive?
 - Larger sample?
 - Insufficient data?
-
+]
 
 
 
@@ -278,44 +279,44 @@ We NEVER **ACCEPT** &lt;br&gt; the **ALTERNATIVE** hypothesis!!!
 # ONE tail or TWO?
 
 
-.pull-left[
+.pull-left[.large[
 1-tailed test suggests a directionality in results
-H1: µ1 &lt; µ2 
-H1: µ1 &gt; µ2
+]
 
-Rejection region collapsed into 1 end of sampling distribution
-e.g., a = 5% in one tail
+- H1: group 1 &lt; group 2 or H1: group 1 &gt; group 2
+
+.large[
+Rejection region collapsed into 1 end
 
 No computational differences for test statistics
-… ONLY the p-level differs …
-1-tailed, p of event or more extreme event in one tail
-2-tailed, p of event or more extreme event in both tails
-p from 1-tailed*2 (2-sided: p = .06, 1-sided: p = .03)
+]
 
+- **ONLY the p-level differs**
+    - 1-tailed, p of event or more extreme event in one tail
+    - 2-tailed, p of event or more extreme event in both tails
+        - p from 1-tailed*2 (2-sided: p = .06, 1-sided: p = .03)
 ]
 
 --
 
-.pull-right[
+.pull-right[.large[
 
 Some circumstances may warrant a 1-tailed test, BUT...
 
-We generally **prefer** and default to a 2-tailed test!!!
+.bluer[**Prefer** and default to a 2-tailed test!!!]
 
-.large[More conservative]
-Rejection region is distributed in both tails
-- e.g.: `\(\alpha = .05\)` distributed across both tails 
-  - (2.5% in each tail)
-
+.dcoral[More conservative]
+]
+- Rejection region is distributed in both tails
+    - e.g.: `\(\alpha = .05\)` distributed across both tails 
+        - (2.5% in each tail)
 - If we know outcome, why do study?
-  - Looks suspicious to reviewer’s…
-  - “significant results at all costs!”
-
---
+  - Looks suspicious to reviewer's?
+      - "significant results at all costs!"
 
 Cheating to run results then decide? **Yes!** `\(\alpha = .075%\)`
 
-Can’t flip coin, say it will land on tails, then lands on heads, and switch and say that it will land on heads
+Can't flip coin, say it will land on tails, then lands on heads, and switch and say that it will land on heads
 
 ]
 
@@ -330,12 +331,12 @@ Can’t flip coin, say it will land on tails, then lands on heads, and switch an
 
 .large[.dcoral[type I error]]
 - We reject the NULL when we should not
-- The risk of “false positive” results
+- The risk of "false positive" results
 
 
 .large[.dcoral[type II error]]
 - We FAIL to reject the NULL when we should
-- The risk of “false negative” results
+- The risk of "false negative" results
 
 ]
 
@@ -343,11 +344,11 @@ Can’t flip coin, say it will land on tails, then lands on heads, and switch an
 
 .pull-right[
 
-We want `\(\alpha\)` to be .nicegreen[SMALL], but…we can’t just make too tiny, since the trade off is increasing the type II error rate
+We want `\(\alpha\)` to be .nicegreen[SMALL], but?we can?t just make too tiny, since the trade off is increasing the type II error rate
 
-.nicegreen[DEFAULT] is `\(\alpha = .05\)` (5% = 1 in 20 &amp; seems *‘rare’* to humans) **BUT** there is nothing magical about it
+.nicegreen[DEFAULT] is `\(\alpha = .05\)` (5% = 1 in 20 &amp; seems *?rare?* to humans) **BUT** there is nothing magical about it
 
-Let it be .nicegreen[LARGER] value, `\(\alpha = .10\)`, **IF** we’d rather not miss any potential relationship and are okay with some false positives
+Let it be .nicegreen[LARGER] value, `\(\alpha = .10\)`, **IF** we'd rather not miss any potential relationship and are okay with some false positives
   - Ex) screening genes, early drug investigation, pilot study
   
 Set it .nicegreen[SMALLER], `\(\alpha = .01\)`, **IF** false positives are costly and we want to be more stringent
@@ -374,9 +375,9 @@ Set it .nicegreen[SMALLER], `\(\alpha = .01\)`, **IF** false positives are costl
 ### Variables have a normal distribution
 - Not as important if the sample is large (Central Limit Theorem)
 - IF the sample is far from normal &amp;/or small n, might want to transform variables
-  - Look at plots: histogram, boxplot, &amp; QQ plot (straight 45º line)
-  - Skewness &amp; Kurtosis: Divided value by its SE &amp; &gt; ± 2 indicates issues
-  - Shapiro-Wilks test (small N): p &lt; .05 ??? not normal
+  - Look at plots: histogram, boxplot, &amp; QQ plot (straight 45? line)
+  - Skewness &amp; Kurtosis: Divided value by its SE -- value &gt; 2 indicates issues
+  - Shapiro-Wilks test (small N): p &lt; .05 = not normal
   - Kolmogorov-Smirnov test (large N)
   
   
@@ -387,7 +388,7 @@ Set it .nicegreen[SMALLER], `\(\alpha = .01\)`, **IF** false positives are costl
 
 - State the alpha &amp; number of tails prior to any results
 
-- Report exact p-values (usually 2 decimal places), except for “p &lt; .001”
+- Report exact p-values (usually 2 decimal places), except for `p &lt; .001`
 
 
 --
@@ -416,15 +417,15 @@ Assume the general population has an anxiety scale that is expressed as a T scor
 ---
 # Cautions About Significance Tests
 
-### What statistical significance does not mean…
+### What statistical significance does not mean?
 
 Statistical significance only says whether the effect observed is likely to be due to chance alone because of random sampling.
 
-Statistical significance may not be practically important. That’s because statistical significance doesn’t tell you about the magnitude of the effect, only that there is one. 
+Statistical significance may not be practically important. That?s because statistical significance doesn?t tell you about the magnitude of the effect, only that there is one. 
 
 An effect could be too small to be relevant. And with a large enough sample size, significance can be reached even for the tiniest effect.
 
-A drug to lower temperature is found to reproducibly lower patient temperature by 0.4°Celsius (P-value &lt; 0.01). But clinical benefits of temperature reduction only appear for a 1°decrease or larger. 
+A drug to lower temperature is found to reproducibly lower patient temperature by 0.4?Celsius (P-value &lt; 0.01). But clinical benefits of temperature reduction only appear for a 1?decrease or larger. 
 
 .center[ .dcoral[ STATISTICAL significance does NOT mean PRACTICAL significance!!!]]
 
@@ -434,16 +435,16 @@ A drug to lower temperature is found to reproducibly lower patient temperature b
 ---
 # Cautions About Significance Tests
 
-### Don’t ignore lack of significance
+### Don't ignore lack of significance
 
-Consider this provocative title from the British Medical Journal: “Absence of evidence is not evidence of absence.”
+.large[
+Consider this provocative title from the British Medical Journal: "Absence of evidence is not evidence of absence."
 
-Having no proof of who committed a murder does not imply that the murder was not committed. 
-
-Indeed, failing to find statistical significance in results is not rejecting the null hypothesis. This is very different from actually accepting it. The sample size, for instance, could be too small to overcome large variability in the population.
-
-When comparing two populations, lack of significance does NOT imply that the two samples come from the same population. They could represent two very distinct populations with similar mathematical properties.
-
+- Having no proof of who committed a murder does not imply that the murder was not committed. 
+- Indeed, failing to find statistical significance in results is **not rejecting** the null hypothesis. This is very different from actually *accepting* it. 
+    - e.g. The sample size could be too small to overcome large variability in the population.
+- When comparing two populations, lack of significance does NOT imply that the two samples come from the same population. They could represent two very distinct populations with similar mathematical properties.
+]
 
 
 ---
@@ -629,15 +630,8 @@ class: inverse, center, middle
 "countIncrementalSlides": false,
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
