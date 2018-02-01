@@ -26,11 +26,11 @@ knitr::opts_chunk$set(comment     = NA,
 
 class: center, middle
 
-## "I’m afraid that I rather <br> give myself away  when I explain,”  <br> said he. <br> “Results without causes <br> are much more impressive.”
+## "I'm afraid that I rather <br> give myself away  when I explain,"  <br> said he. <br> "Results without causes <br> are much more impressive."
 
 
 ### -- Sherlock Holmes 
-*The Stock-Broker’s Cat*
+*The Stock-Broker's Cat*
 
 
 
@@ -113,7 +113,7 @@ background-image: url(figures/fig_old_cig.png)
 
 
 - Phenomenological (educational, behavioral, biological) credibility
-- Strength of association – ruling out occurrence by chance alone
+- Strength of association, ruling out occurrence by chance alone
 - Consistency with past research findings
 - Temporality
 - Dose-response relationship
@@ -172,7 +172,7 @@ background-image: url(figures/fig_yellow_box_1.png)
 ## Definition of a p-value:
 
 .center[.large[ .large[
-The probability of observing <br> a test statistic <br> .dcoral[**“as extreme or more extreme”**] <br> .nicegreen[**IF**] <br> the NULL hypothesis is true.
+The probability of observing <br> a test statistic <br> .dcoral[**as extreme or more extreme**] <br> .nicegreen[**IF**] <br> the NULL hypothesis is true.
 ]]]]
 
 
@@ -213,11 +213,11 @@ background-image: url(figures/fig_scale_null.png)
 
 # Innocent Until Proven Guilty
 
-**IF** there is Not enough statistical evidence to reject…
+**IF** there is Not enough statistical evidence to reject
 
 Judgment suspended until further evidence evaluated:
 
-- “Inconclusive”
+- "Inconclusive"
 - Larger sample?
 - Insufficient data?
 
@@ -324,8 +324,8 @@ Rejection region is distributed in both tails
   - (2.5% in each tail)
 
 - If we know outcome, why do study?
-  - Looks suspicious to reviewer’s…
-  - “significant results at all costs!”
+  - Looks suspicious to reviewer's?
+  - "significant results at all costs!"
 ]
 
 
@@ -341,13 +341,13 @@ background-image: url(figures/fig_err_types.png)
 
 .large[.dcoral[**type I error**]]
 - We reject the NULL when we should not
-- The risk of “false positive” results
+- The risk of "false positive" results
 
 
 
 .large[.dcoral[**type II error**]]
 - We FAIL to reject the NULL when we should
-- The risk of “false negative” results
+- The risk of "false negative" results
 
 ]
 
@@ -359,11 +359,11 @@ background-image: url(figures/fig_conf_matrix.png)
 
 .pull-right[
 
-We want $\alpha$ to be .nicegreen[SMALL], but…we can’t just make too tiny, since the trade off is increasing the type II error rate
+We want $\alpha$ to be .nicegreen[SMALL], but we can't just make too tiny, since the trade off is increasing the type II error rate
 
-.nicegreen[DEFAULT] is $\alpha = .05$ (5% = 1 in 20 & seems *‘rare’* to humans) **BUT** there is nothing magical about it
+.nicegreen[DEFAULT] is $\alpha = .05$ (5% = 1 in 20 & seems *rare* to humans) **BUT** there is nothing magical about it
 
-Let it be .nicegreen[LARGER] value, $\alpha = .10$, **IF** we’d rather not miss any potential relationship and are okay with some false positives
+Let it be .nicegreen[LARGER] value, $\alpha = .10$, **IF** we'd rather not miss any potential relationship and are okay with some false positives
   - Ex) screening genes, early drug investigation, pilot study
   
 Set it .nicegreen[SMALLER], $\alpha = .01$, **IF** false positives are costly and we want to be more stringent
@@ -393,8 +393,8 @@ Set it .nicegreen[SMALLER], $\alpha = .01$, **IF** false positives are costly an
 
 - Not as important if the sample is large (Central Limit Theorem)
 - IF the sample is far from normal &/or small n, might want to transform variables
-  - Look at plots: .dcoral[histogram, boxplot, & QQ plot] (straight 45º line)
-  - Skewness & Kurtosis: Divided value by its SE & > ± 2 indicates issues
+  - Look at plots: .dcoral[histogram, boxplot, & QQ plot] (straight $45\degree$ line)
+  - Skewness & Kurtosis: Divided value by its SE & $> \pm 2$ indicates issues
   - .dcoral[Shapiro-Wilks] test (small N): p < .05 ??? not normal
   - Kolmogorov-Smirnov test (large N)
   
@@ -406,7 +406,7 @@ Set it .nicegreen[SMALLER], $\alpha = .01$, **IF** false positives are costly an
 
 - State the alpha & number of tails prior to any results
 
-- Report exact p-values (usually 2 decimal places), except for “p < .001”
+- Report exact p-values (usually 2 decimal places), except for `p < .001`
 
 
 --
@@ -457,14 +457,14 @@ background-image: url(figures/fig_ztest_2.png)
 
 - may not be .nicegreen[practically important]
 
-That’s because *statistical* significance doesn’t tell you about the .nicegreen[**magnitude of the effect**], only that there **is** one. 
+That's because *statistical* significance doesn't tell you about the .nicegreen[**magnitude of the effect**], only that there **is** one. 
 
 
 An *effect* could be too small to be .nicegreen[**relevant**].  <br><br>
 
 And with a large enough sample size, significance can be reached even for the tiniest effect.
 <br><br>
-- EX) A drug to lower temperature is found to reproducibly lower patient temperature by 0.4°Celsius, $p \lt 0.01$. But clinical benefits of temperature reduction only appear for a 1°decrease or larger. 
+- EX) A drug to lower temperature is found to reproducibly lower patient temperature by $0.4\degree$ Celsius, $p \lt 0.01$. But clinical benefits of temperature reduction only appear for a 1ï¿½decrease or larger. 
 
 .large[ .center[ .dcoral[**STATISTICAL significance does NOT mean PRACTICAL significance!!!**]]]
 
@@ -474,9 +474,9 @@ And with a large enough sample size, significance can be reached even for the ti
 ---
 # Cautions About Significance Tests
 
-### Don’t ignore lack of significance
+### Donï¿½t ignore lack of significance
 
-.center[.large[.dcoral[**“Absence of evidence is not evidence of absence.”**]]]
+.center[.large[.dcoral[**"Absence of evidence is not evidence of absence."**]]]
 
 .nicegreen[.center[Having no proof of who committed a murder <br> does not imply that the murder was not committed. ]]
 
