@@ -19,14 +19,193 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 
-## I'm afraid that I rather give myself away when I explain," said he. "Results without causes are much more impressive."
+## "I’m afraid that I rather &lt;br&gt; give myself away  when I explain,”  &lt;br&gt; said he. &lt;br&gt; “Results without causes &lt;br&gt; are much more impressive.”
 
 
 ### -- Sherlock Holmes 
-*The Stock-Broker's Cat
+*The Stock-Broker’s Cat*
+
+
+
 
 
 ---
+# Two Types of Research Questions
+
+
+.pull-left[
+.center[
+### Do .dcoral[groups] &lt;br&gt;*significantly* .dcoral[differ] &lt;br&gt; on 1 or more characteristics?
+]
+
+Comparing group means, counts, or proportions
+
+.dcoral[
+- `\(t\)`-tests
+- ANOVA
+- `\(\chi^2\)` tests]
+]
+
+
+.pull-right[
+.center[
+### Is there a &lt;br&gt; *significant* .nicegreen[relationship] &lt;br&gt; among a set of .nicegreen[variables]?
+]
+
+
+Testing the association or dependence
+
+.nicegreen[
+- Correlation
+- Regression]
+]
+
+
+
+
+---
+# Inferential Statistics
+
+.pull-left[
+## Descriptive statistics are limited
+
+- Rely only on **raw** data distribution
+- Generally describe **one** variable only
+- Do not address **accuracy** of estimators or hypothesis testing
+- How **precise** is sample mean or does it differ from a given value?
+- Are there between or within **group differences** or **associations**?
+]
+
+.pull-right[
+### Goals of inferential statistics
+
+- .dcoral[Hypothesis testing]
+  - `\(p\)`-values
+- .dcoral[Parameter estimation]
+  - confidence intervals
+
+
+### Repeated sampling
+- Estimators will vary from sample to sample
+- Sampling or random error is variability due to chance
+]
+
+
+
+
+---
+# Causality &amp; Statistics
+
+.center[
+## .dcoral[Causality] depends on .nicegreen[**evidence**] &lt;br&gt; from outside statistics:
+]
+
+- Phenomenological (educational, behavioral, biological) credibility
+- Strength of association – ruling out occurrence by chance alone
+- Consistency with past research findings
+- Temporality
+- Dose-response relationship
+- Specificity
+- Prevention
+
+.large[.dcoral[**Causality** is often a **judgmental** evaluation of **combined** results from **several studies**]] 
+
+
+
+---
+# z-scores and Statistical Inference
+
+
+Probabilities of `\(z\)`-scores used to determine how **unlikely** or **unusual** a single case is relative to other cases in a sample 
+
+## .center[**Small** probabilities &lt;br&gt; .dcoral[*(p-values)*] &lt;br&gt; reflect **unlikely** or **unusual scores**]
+
+Not frequently interested in whether **individual scores** are unusual relative to others, but whether scores from **groups of cases** are unusual.
+
+.nicegreen[**Sample mean**], `\(\bar{x}\)` or `\(M\)`, summarizes .nicegreen[**central tendency**] of a group or sample of subjects
+
+
+
+
+---
+# Steps of a Hypothesis test 
+
+.pull-left[
+1. State the .nicegreen[Hypotheses] 
+  - Null &amp; Alternative
+2. Select the .nicegreen[Statistical Test] &amp; .nicegreen[Significance Level] 
+  - `\(\alpha\)` level
+  - One vs. Two tails
+3. Select random sample and collect data
+4. Find the .nicegreen[Region of Rejection]
+  - Based on `\(\alpha\)` &amp; # of tails
+4. Calculate the .nicegreen[Test Statistic]
+  - Examples include: `\(z, t, F, \chi^2\)`
+5. Write the .nicegreen[Conclusion]
+  - Statistical decision must by in context!
+]
+
+
+.pull-right[
+## Definition of a p-value:
+
+.center[.large[ .large[
+The probability of observing &lt;br&gt; a test statistic &lt;br&gt; .dcoral[**“as extreme or more extreme”**] &lt;br&gt; .nicegreen[**IF**] &lt;br&gt; the NULL hypothesis is true.
+]]]]
+
+
+
+
+---
+# Hypotheses
+
+Hypotheses are always specified in terms of .dcoral[**population**]
+ - Use `\(\mu\)` for the population mean, not `\(\bar{x}\)` which is for a sample
+
+## If you are comparing TWO population MEANS:
+
+.pull-left[ 
+.center[
+### .dcoral[**Null**] &lt;br&gt; Hypothesis &lt;br&gt; ]
+`$$H_0: \mu_1 = \mu_2$$`
+]
+
+.pull-right[ 
+.center[
+### .nicegreen[**Research**  or Alternative] &lt;br&gt; Hypothesis options...]
+`$$H_1: \mu_1 \ne \mu_2$$`
+`$$H_1: \mu_1 \lt \mu_2$$`
+`$$H_1: \mu_1 \gt \mu_2$$`
+]
+
+
+
+
+---
+# Innocent until proven guilty
+
+**IF** there is Not enough statistical evidence to reject…
+
+Judgment suspended until further evidence evaluated:
+
+- “Inconclusive”
+- Larger sample?
+- Insufficient data?
+
+
+
+
+
+
+
+---
+# Rejecting the Null Hypothesis
+
+Assumption:  the NULL hypothesis is TRUE in the POPULATION
+IF the p-value is very SMALL (p-value&lt; a), it is UNLIKELY we would have observed a sample that extreme JUST DUE TO RANDOM CHANCE.
+Can use the p-value&lt; a   OR   test statistic &lt; Critical Value
+We either REJECT or FAIL TO REJECT the Null hypothesis 
+We NEVER ACCEPT the ALTERNATIVE!!!
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
@@ -35,8 +214,15 @@ class: center, middle
 "countIncrementalSlides": false,
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
