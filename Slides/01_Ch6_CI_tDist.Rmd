@@ -113,7 +113,7 @@ Wrote paper using moniker .nicegreen[“a student”] discussing nature of $SE_M
 
 - Area under curve = $p(event[s])$
 
-- When $N$ is **large** ($\approx 300$), $t = z$
+- When $N$ is **large** --- $\approx 300$ --- $t = z$
 ]
 
 
@@ -126,7 +126,7 @@ Wrote paper using moniker .nicegreen[“a student”] discussing nature of $SE_M
 - Different distribution for each $N$ (or $df$)
 
 - Larger area in **tails** (%) for any value of $t$ corresponding to $z$
-  - $CV_t \gt CV_z$, for a given $\alpha$
+  - $t_{cv} \gt z_{cv}$, for a given $\alpha$
 
 - More difficult to reject $H_0$ w/ t-distribution
   - $df = N - 1$
@@ -162,7 +162,9 @@ When $\sigma$ is known, $t$-statistic is sometimes computed (rather than $z$-sta
 
 Estimate the population $SE_M$ with sample data:
 
-.center[Estimated $SE_M$ is the amount a sample's observed **mean** <br>may have deviated from <br> the true or population value <br>just due to random chance variation due to sampling.]
+.center[
+Estimated $SE_M$ is the amount a sample's observed **mean** <br>may have deviated from <br> the true or population value <br>just due to random chance variation due to sampling.
+]
 
 
 
@@ -241,7 +243,7 @@ How .nicegreen[**close**] is estimate to population parameter?
     - Upper limit: UL or UCL
     - Lower limit: LL or LCL
 
-CI expresses our .nicegreen[**confidence**] in a statistic & the .nicegreen[*width*] depends on $SE_M$ and $CV_t$
+CI expresses our .nicegreen[**confidence**] in a statistic & the .nicegreen[*width*] depends on $SE_M$ and $t_{cv}$
 
 - Both are function of $N$ 
   - Larger $N \rightarrow$ Smaller CI 
