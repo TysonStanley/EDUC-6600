@@ -57,9 +57,9 @@ $$
 
 
 ---
-# Small samples
+## .dcoral[Small] samples
 
-As samples get smaller: $N \downarrow \dots$
+As samples get smaller: $N \downarrow$
 
 - the skewness of the sampling distribution of $s^2 \uparrow$ 
 - $s^2$ **under**estimates $\sigma^2$
@@ -68,7 +68,7 @@ As samples get smaller: $N \downarrow \dots$
 
 --
 
-### Comparatively... in LARGE smaples
+## Comparatively... in .dcoral[LARGE] samples
 
 - $s^2$ **un**biased estimate of $\sigma^2$
 - $\sigma$ is a constant, *unknown truth*
@@ -88,7 +88,7 @@ background-image: url(figures/fig_will_gossett.png)
 1908, William Gosset
 
   - Guinness Brewing Company, England
-  - Invented $t-test$ for **small** samples for brewing quality control
+  - Invented `t-test` for **small** samples for brewing quality control
 
 Wrote paper using moniker .nicegreen[“a student”] discussing nature of $SE_M$ when .dcoral[using] $s^2$ .dcoral[instead of] $\sigma^2$
 
@@ -113,7 +113,7 @@ Wrote paper using moniker .nicegreen[“a student”] discussing nature of $SE_M
 
 - Area under curve = $p(event[s])$
 
-- When $N$ is **large** ($\approx 300$), $t = z$
+- When $N$ is **large** --- $\approx 300$ --- $t = z$
 ]
 
 
@@ -126,7 +126,7 @@ Wrote paper using moniker .nicegreen[“a student”] discussing nature of $SE_M
 - Different distribution for each $N$ (or $df$)
 
 - Larger area in **tails** (%) for any value of $t$ corresponding to $z$
-  - $CV_t \gt CV_z$, for a given $\alpha$
+  - $t_{cv} \gt z_{cv}$, for a given $\alpha$
 
 - More difficult to reject $H_0$ w/ t-distribution
   - $df = N - 1$
@@ -149,7 +149,9 @@ background-image: url(figures/fig_t_table.png)
 ---
 # Calculating the t-Statistic
 
+.bluer[
 $x$ is interval/ratio data (ordinal okay: $\ge 10-16$ levels or values)
+]
 
 Like $z$, $t$-statistic represents a **SD** score (the # of SE's that $\bar{x}$ deviates from $\mu$)
 
@@ -160,11 +162,13 @@ Like $z$, $t$-statistic represents a **SD** score (the # of SE's that $\bar{x}$ 
 
 When $\sigma$ is known, $t$-statistic is sometimes computed (rather than $z$-statistic) if $N$ is small
 
+.center[.large[.dcoral[
 Estimate the population $SE_M$ with sample data:
+]]]
 
-.center[Estimated $SE_M$ is the amount a sample's observed **mean** <br>may have deviated from <br> the true or population value <br>just due to random chance variation due to sampling.]
-
-
+.center[
+Estimated $SE_M$ is the amount a sample's observed **mean** <br>may have deviated from <br> the true or population value <br>just due to random chance variation due to sampling.
+]
 
 
 
@@ -241,7 +245,7 @@ How .nicegreen[**close**] is estimate to population parameter?
     - Upper limit: UL or UCL
     - Lower limit: LL or LCL
 
-CI expresses our .nicegreen[**confidence**] in a statistic & the .nicegreen[*width*] depends on $SE_M$ and $CV_t$
+CI expresses our .nicegreen[**confidence**] in a statistic & the .nicegreen[*width*] depends on $SE_M$ and $t_{cv}$
 
 - Both are function of $N$ 
   - Larger $N \rightarrow$ Smaller CI 
