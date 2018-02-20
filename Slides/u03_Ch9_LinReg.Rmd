@@ -1,0 +1,385 @@
+---
+title: "Linear Regression"
+subtitle: "Cohen Chapter 9 <br><br> .small[EDUC/PSY 6600]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: pres3.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment     = NA,
+                      cache       = TRUE,
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE,
+                      fig.align   = "center",   # center all figures
+                      fig.width   = 6.5,        # set default figure width to 4 inches
+                      fig.height  = 4.5)        # set default figure height to 3 inches
+```
+
+class: center, middle
+
+## "Statistics is not a discipline like physics, chemistry, or biology where we study a subject to solve problems in the same subject. <br> We study statistics with the main aim of solving problems in other disciplines."
+
+### -- C.R. Rao, Ph.D. 
+
+---
+# Motivating Example
+
+.large[
+- Dr. Mortimer is interested in knowing whether people who have a positive view of themselves in one aspect of their lives also tend to have a positive view of themselves in other aspects of their lives. 
+- He has 80 men complete a self-concept inventory that contains 5 scales. Four scales involve questions about how competent respondents feel in the areas of intimate relationships, relationships with friends, common sense reasoning and everyday knowledge, and academic reasoning and scholarly knowledge. 
+- The 5th scale includes items about how competent a person feels in general. 
+- 10 correlations are computed between all possible pairs of variables.
+]
+
+---
+# Correlation
+
+.pull-left[
+.large[
+- .dcoral[Interested in **degree** of covariation or co-relation among >1 variables measured on SAME objects/participants]
+    - Not interested in group differences, per se
+- Variable measurements have:
+    - Order: Correlation
+    - No order: Association or dependence
+]]
+
+--
+
+.pull-right[.large[
+- Level of measurement for each variable determines type of correlation coefficient
+- Data can be in raw or standardized format
+- Correlation coefficient is .nicegreen[scale-invariant]
+- .bluer[Statistical significance] of correlation
+    - $H_0$: population correlation coefficient = 0
+]]
+
+---
+background-image: url(figures/fig_spurious.jpeg)
+background-position: 50% 50%
+background-size: 1200px
+
+
+.footnote[http://www.tylervigen.com/spurious-correlations]
+
+---
+# Always **Visualize** Data First
+
+### Scatterplots
+
+```{r, echo=FALSE}
+set.seed(843)
+df <- tibble::data_frame(
+  x = rnorm(100),
+  y = x + rnorm(100)
+)
+```
+
+.pull-left[
+
+*Aka: scatterdiagrams, scattergrams*
+
+Notes:
+1. Can stratify scatterplots by subgroups
+2. Each subject is represented by 1 dot (x and y coordinate)
+3. Fit line can indicate nature and degree of relationship (Regression or prediction lines)
+
+
+```{r, eval=FALSE}
+library(tidyverse)
+df %>%
+  ggplot(aes(x, y)) +
+    geom_point() +
+    geom_smooth(se = FALSE,
+                method = "lm")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+library(tidyverse)
+df %>%
+  ggplot(aes(x, y)) +
+    geom_point() +
+    geom_smooth(se = FALSE,
+                method = "lm")
+```
+]
+
+---
+# Correlation: Direction
+
+.pull-left[.center[
+#### .nicegreen[Positive Association]
+.large[
+**High values** of one variable tend to occur with **High values** of the other
+```{r, echo=FALSE}
+df %>%
+  ggplot(aes(x, y)) +
+    geom_point() +
+    geom_smooth(se = FALSE,
+                method = "lm",
+                color = "chartreuse3") +
+    labs(subtitle = "Positive")
+```
+]]]
+
+.pull-right[.center[
+#### .bluer[Negative Association]
+.large[
+**High values** of one variable tend to occur with **Low values** of the other
+```{r, echo=FALSE}
+df %>%
+  ggplot(aes(x, -y)) +
+    geom_point() +
+    geom_smooth(se = FALSE,
+                method = "lm",
+                color = "dodgerblue3") +
+    labs(x = "x",
+         y = "y",
+         subtitle = "Negative")
+```
+]]]
+
+
+---
+# Correlation: Strength
+
+The strength of the relationship between the two variables can be seen by how much variation, or scatter, there is around the main form.
+
+- With a strong relationship, you can get a pretty good estimate of y if you know x.
+- With a weak relationship, for any x you might get a wide range of  y values.
+
+--
+
+```{r, echo=FALSE}
+set.seed(843)
+df <- tibble::data_frame(
+  x = rnorm(100),
+  y = x,
+  y2 = x + rnorm(100)
+)
+```
+
+.pull-left[
+```{r, echo=FALSE}
+ggplot(df, aes(x, y)) +
+  geom_point()
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+ggplot(df, aes(x, y2)) +
+  geom_point()
+```
+]
+
+---
+# Scatterplot Patterns
+
+```{r, echo=FALSE}
+set.seed(843)
+df <- tibble::data_frame(
+  x = rnorm(100),
+  y = x + rnorm(100),
+  y2 = x^2 + rnorm(100),
+  y3 = rnorm(100),
+  y4 = 5,
+  y5 = x
+)
+```
+
+.pull-left[
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Linear")
+```
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y2)) +
+  geom_point() +
+  labs(title = "Non-Linear")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y3)) +
+  geom_point() +
+  labs(title = "No Relation")
+```
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y4)) +
+  geom_point() +
+  labs(title = "No Relation")
+```
+]
+
+
+---
+# Predictability
+
+The ability to predict `y` based on `x` is another indication of correlation strength:
+
+.pull-left[
+```{r, echo=FALSE}
+ggplot(df, aes(x, y5)) +
+  geom_point() +
+  labs(title = "Can predict y perfectly")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Hard to predict y using x")
+```
+]
+
+---
+# Scatterplot: Scale
+
+.pull-left[
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Bad") +
+  coord_cartesian(ylim = c(-10, 10),
+                  xlim = c(-10, 10))
+```
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Good")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Bad") +
+  coord_cartesian(xlim = c(-10, 10))
+```
+```{r, echo=FALSE, fig.height=3}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Bad") +
+  coord_cartesian(ylim = c(-10, 10))
+```
+]
+
+Note: all have the same data! Also, `ggplot2`'s defaults are usually pretty good
+
+???
+- Using an inappropriate scale for a scatterplot can give an incorrect impression. 
+- Both variables should be given a similar amount of space:
+  - Plot roughly square
+  - Points should occupy all the plot space (no blank space)
+
+
+---
+class: inverse, center, middle
+
+# Let's Apply This to the Cancer Dataset 
+
+
+---
+# Read in the Data
+
+```{r}
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(haven)        # Read in SPSS datasets
+library(psych)        # Lots of nice tid-bits
+library(car)          # Companion to "Applied Regression"
+```
+
+```{r, eval=FALSE}
+cancer_raw <- haven::read_spss("cancer.sav")
+```
+
+```{r, include=FALSE}
+cancer_raw <- haven::read_spss("data/cancer.sav")
+```
+
+### And Clean It
+
+```{r, message=FALSE, warning=FALSE}
+cancer_clean <- cancer_raw %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate(id = factor(id)) %>% 
+  dplyr::mutate(trt = factor(trt,
+                             labels = c("Placebo", 
+                                        "Aloe Juice"))) %>% 
+  dplyr::mutate(stage = factor(stage))
+```
+
+
+
+
+---
+# 1 sample t Test vs. Historic Control
+
+Do the patients weigh more than 165 pounds at intake, on average?
+
+```{r}
+cancer_clean %>% 
+  dplyr::pull(weighin) %>% 
+  t.test(mu = 165)
+```
+
+
+
+---
+## ...Change the Confidence Level
+
+Find a .dcoral[99%] confience level for the population mean weight.
+
+```{r}
+cancer_clean %>% 
+  dplyr::pull(weighin) %>% 
+  t.test(mu = 165,
+         conf.level = 0.99)
+```
+
+
+
+---
+## ...Restrict to a Subsample
+
+Do the patients with .dcoral[stage 3 & 4] cancer weigh more than 165 pounds at intake, on average?
+
+```{r}
+cancer_clean %>% 
+  dplyr::filter(stage %in% c("3", "4")) %>% 
+  dplyr::pull(weighin) %>% 
+  t.test(mu = 165)
+```
+
+
+
+
+
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+
+---
+class: inverse, center, middle
+
+# Next Topic
+
+### Independent Samples t Tests for Means
