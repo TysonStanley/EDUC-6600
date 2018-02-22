@@ -287,6 +287,409 @@ Note: all have the same data! Also, `ggplot2`'s defaults are usually pretty good
   - Plot roughly square
   - Points should occupy all the plot space (no blank space)
 
+---
+# Outliers
+
+
+.pull-left[.large[
+- An .dcoral[outlier] is a data value that has a very low probability of occurrence (i.e., it is unusual or unexpected). 
+
+- In a scatterplot, BIVARIATE outliers are points that fall outside of the overall pattern of the relationship.
+
+- *Not all extreme values are outliers.*
+]]
+
+.pull-right[
+```{r, echo=FALSE}
+set.seed(843)
+library(tidyverse)
+df <- tibble::data_frame(
+  x = c(rnorm(99), 5),
+  y = x + c(rnorm(99), 5)
+)
+df2 <- tibble::data_frame(
+  x = c(rnorm(100)),
+  y = x + c(rnorm(99), 10)
+)
+```
+```{r, echo=FALSE, fig.height=6.5, fig.width=8}
+p1 = ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(title = "Extreme Value\n(Possibly not an Outlier)")
+p2 = ggplot(df2, aes(x, y)) +
+  geom_point() +
+  labs(title = "Extreme Value\n(Likely an Outlier)")
+gridExtra::grid.arrange(p1, p2, ncol = 2)
+```
+
+]
+
+
+
+
+---
+## Pearson "Product Moment" Correlation Coefficient (r)
+
+### 
+.large[
+- Used as a measure of: 
+    - Magnitude (strength) and direction of relationship between two continuous variables
+    - Degree to which coordinates cluster around STRAIGHT regression line
+
+- Test-retest, alternative forms, and split half reliability
+
+- Building block for many other statistical methods
+]
+
+.pull-left[
+### Population: $\rho$
+]
+.pull-right[
+### Sample: `r`
+]
+
+
+
+---
+# Pearson "Product Moment" Correlation Coefficient (r)
+
+.large[
+- The correlation coefficient is a measure of the .dcoral[direction] and .nicegreen[strength] of a *linear* relationship. 
+- It is calculated using the mean and the standard deviation of both the x and y variables. 
+- Correlation can only be used to describe quantitative variables. Why?
+]
+
+.pull-left[.large[
+`r` does not distinguish between x and y
+
+`r` has no units of measurement
+]]
+
+.pull-right[.large[
+`r` ranges from -1 to +1
+
+Influential points…can change `r` a great deal!
+]]
+
+
+
+---
+# Correlation: Calculating
+
+$$ 
+\LARGE r = \frac{1}{n - 1} \sum^n_{i = 1} \LARGE(\normalsize\frac{x_i - \bar{x}}{s_x}\LARGE)(\normalsize \frac{y_i - \bar{y}}{s_y}\LARGE)
+$$
+
+### Anyone want to do this by hand??
+
+.large[
+Let's use R to do this for us 
+]
+
+
+---
+## Correlation: Calculating
+
+```{r, echo=FALSE}
+df <- tibble::data_frame(
+  x = c(rnorm(100, 20, 5)),
+  y = 5*x + c(rnorm(100, 100, 20))
+) %>%
+  mutate(  
+    x_s = scale(x),
+    y_s = scale(y))
+```
+
+
+.pull-left[
+```{r, echo=FALSE}
+df %>%
+  ggplot(aes(x, y)) +
+  geom_point()
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE}
+df %>%
+  ggplot(aes(x_s, y_s)) +
+  geom_point()
+```
+]
+
+### Same Plots -- Left is unstandardized, Right is standardized
+
+**Standardization** allows us to compare correlations between data sets where variables are measured in different units or when variables are different. For instance, we might want to compare the correlation between [swim time and pulse], with the correlation between [swim time and breathing rate].
+
+
+---
+# Correlations in R Code
+
+```{r, echo=FALSE}
+library(tidyverse)
+df <- tibble::data_frame(
+  x = rnorm(100),
+  y = x + rnorm(100, 10, 10)
+)
+```
+
+.pull-left[
+```{r, eval=FALSE}
+df %>%
+  cor.test(~x + y,
+           data = .,
+           method = "pearson")
+```
+<br>
+```{r, eval=FALSE}
+df %>%
+  furniture::tableC(x, y)
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+df %>%
+  cor.test(~x + y,
+           data = .,
+           method = "pearson")
+```
+]
+
+```{r, echo=FALSE}
+df %>%
+  furniture::tableC(x, y)
+```
+
+---
+# Relationship Form
+
+.huge[Correlations only describe **linear** relationships]
+
+
+```{r, echo=FALSE}
+df <- tibble::data_frame(
+  x = rnorm(100),
+  y = x + rnorm(100),
+  y2 = x^2 + rnorm(100)
+)
+```
+
+.pull-left[
+```{r, echo=FALSE}
+df %>%
+  ggplot(aes(x, y)) +
+  geom_point() +
+  labs(title = "Linear")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+df %>%
+  ggplot(aes(x, y2)) +
+  geom_point() +
+  labs(title = "Non-Linear")
+```
+]
+
+.large[
+Note: You can sometimes *transform* a non-linear association to a linear form, for instance by taking the logarithm.
+]
+
+
+# Let's see it in action
+
+## [Correlation App](http://digitalfirst.bfwpub.com/stats_applet/stats_applet_5_correg.html)
+
+.pull-left[
+.large[
+- Influential Points
+
+- Eye-ball the correlation
+
+- Draw the line of the best fit
+]]
+
+.pull-right[
+.large[
+Why are correlations not resistant to outliers?
+
+When do outliers have more *leverage*?
+]
+]
+
+
+---
+background-image: url(figures/fig_bivariate_normal.png)
+background-position: 80% 50%
+background-size: 400px
+
+# Assumptions
+
+.pull-left[
+.large[
+1. Random Sample
+
+2. Relationship is linear (check scatterplot, use transformations)
+
+3. Bivariate normal distribution
+    - Each variable should be normally distributed in population
+    - Joint distribution should be bivariate normal
+    - Curvilinear relationships = violation
+    - Less important as N increases
+]]
+
+
+
+---
+# Sampling Distribution of `rho`
+
+
+.large[
+- Normal distribution about 0
+- Becomes non-normal as $\LARGE \rho$ gets larger and deviates from $\LARGE H_0$ value of 0 in the population
+    - Negatively skewed with large, positive null hypothesized $\rho$
+    - Positively skewed with large, negative null hypothesized $\rho$
+- Leads to 
+    - Inaccurate p-values
+    - No longer testing $\LARGE H_0$ that $\LARGE\rho = 0$
+- Fisher's solution: transform sample `r` coefficients to yield normal sampling distribution, regardless of $\LARGE\rho$
+
+*We will let the computer worry about the details...*
+]
+
+
+---
+background-image: url(figures/fig_t_table2.png)
+background-position: 80% 50%
+background-size: 400px
+
+
+# Hypothesis testing for 1-sample `r`
+
+.pull-left[
+.large[
+$$ \LARGE H_0: \rho = 0$$
+$$\LARGE H_A: \rho \neq 0$$
+
+.center[`r` is converted to a t-statistic]
+
+$$ 
+\LARGE t = \frac{r\sqrt{N - 2}}{\sqrt{1 - r^2}}
+$$
+- Compare to t-distribution with $\Large df = N - 2$
+  - Rejection = statistical evidence of relationship
+  - Or look up critical values of `r`
+]
+
+]
+
+
+
+
+---
+# Example
+
+.large[
+Researcher wishes to correlate scores from 2 tests: current mood state and verbal recal memory
+]
+
+.pull-left[
+```{r, echo=FALSE, comment = "             "}
+df <- tibble::tribble(~Mood, ~Recall,
+                 45,     48,
+                 34,     39,
+                 41,     48,
+                 25,     27,
+                 38,     42,
+                 20,     29,
+                 45,     30)
+df
+```
+
+]
+
+.pull-right[
+```{r}
+df %>%
+  cor.test(~Mood + Recall,
+           data = .)
+```
+]
+
+???
+Talk about each piece of the output
+
+---
+# Power
+
+.pull-left[.large[
+Want to know N necessary to reject $\Large H_0$ given an effect $\Large \rho$ (we transform it into a $\Large d$)
+
+- Determine effect size needed to detect
+- Determine delta ($\Large \delta$; the value from appendix A.4 that would result in given level of power at $\Large \alpha = .05$)
+- Solve: 
+$$
+\Huge(\LARGE \frac{\delta}{d}\Huge)\LARGE^2 + 1 = N
+$$
+]]
+
+.pull-right[.large[
+
+### Example
+
+.nicegreen[Based on a pilot study, if we had a pearson correlation of .6, how many observations should I plan to study to ensure I have at least 80% power for an $\Large \alpha = .05$, two-tailed test?
+]]]
+
+
+---
+# Factors Affecting Validity of `r`
+
+.large[
+- Range restriction (variance of X and/or Y)
+  - r can be inflated or deflated
+  - May be related to small N
+
+- Outliers
+  - `r` can be heavily influenced
+
+- Use of heterogeneous subsamples
+  - Combining data from heterogeneous groups can inflate correlation coefficient or yield spurious results by stretching out data
+]
+
+
+---
+# Interpretation and Communcation
+
+.huge[
+Correlation $\Large \neq$ Causation
+
+But, correlation can be causation
+]
+
+.large[
+- Can infer strength and direction; not form or prediction from r
+- Can say that prediction will be better with large r, but cannot predict actual values
+
+- Statistical significance
+  - p-value heavily influenced by N
+  - Need to interpret size of r-statistic, more than p-value
+
+- APA format: r(df) = -.74, p = .006
+]
+
+
+---
+background-image: url(figures/fig_APA_correlations.png)
+background-position: 50% 98%
+background-size: 1050px
+
+# APA Style of Reporting
+
+
+
 
 ---
 class: inverse, center, middle
@@ -324,50 +727,23 @@ cancer_clean <- cancer_raw %>%
   dplyr::mutate(stage = factor(stage))
 ```
 
+---
+# R Code: Scatterplot with Regression Line
 
 
 
 ---
-# 1 sample t Test vs. Historic Control
-
-Do the patients weigh more than 165 pounds at intake, on average?
-
-```{r}
-cancer_clean %>% 
-  dplyr::pull(weighin) %>% 
-  t.test(mu = 165)
-```
+# R Code: Scatterplot with Facetting
 
 
 
 ---
-## ...Change the Confidence Level
-
-Find a .dcoral[99%] confience level for the population mean weight.
-
-```{r}
-cancer_clean %>% 
-  dplyr::pull(weighin) %>% 
-  t.test(mu = 165,
-         conf.level = 0.99)
-```
+# R Code: Correlation Matrix
 
 
 
 ---
-## ...Restrict to a Subsample
-
-Do the patients with .dcoral[stage 3 & 4] cancer weigh more than 165 pounds at intake, on average?
-
-```{r}
-cancer_clean %>% 
-  dplyr::filter(stage %in% c("3", "4")) %>% 
-  dplyr::pull(weighin) %>% 
-  t.test(mu = 165)
-```
-
-
-
+# R Code: Correlations by Group
 
 
 
