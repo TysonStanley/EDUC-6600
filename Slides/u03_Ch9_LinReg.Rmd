@@ -59,7 +59,7 @@ class: center, middle
 - Data can be in raw or standardized format
 - Correlation coefficient is .nicegreen[scale-invariant]
 - .bluer[Statistical significance] of correlation
-    - $H_0$: population correlation coefficient = 0
+    - $\Large H_0$: population correlation coefficient = 0
 ]]
 
 ---
@@ -342,7 +342,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 ]
 
 .pull-left[
-### Population: $\rho$
+### Population: $\Huge \rho$
 ]
 .pull-right[
 ### Sample: `r`
@@ -549,12 +549,12 @@ background-size: 400px
 
 .large[
 - Normal distribution about 0
-- Becomes non-normal as $\LARGE \rho$ gets larger and deviates from $\LARGE H_0$ value of 0 in the population
+- Becomes non-normal as $\Large \rho$ gets larger and deviates from $\Large H_0$ value of 0 in the population
     - Negatively skewed with large, positive null hypothesized $\rho$
     - Positively skewed with large, negative null hypothesized $\rho$
 - Leads to 
     - Inaccurate p-values
-    - No longer testing $\LARGE H_0$ that $\LARGE\rho = 0$
+    - No longer testing $\Large H_0$ that $\Large \rho = 0$
 - Fisher's solution: transform sample `r` coefficients to yield normal sampling distribution, regardless of $\LARGE\rho$
 
 *We will let the computer worry about the details...*
@@ -832,4 +832,4 @@ class: inverse, center, middle
 
 # Next Topic
 
-### Independent Samples t Tests for Means
+### Linear Regression
