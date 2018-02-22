@@ -629,7 +629,7 @@ Talk about each piece of the output
 Want to know N necessary to reject $\Large H_0$ given an effect $\Large \rho$ (we transform it into a $\Large d$)
 
 - Determine effect size needed to detect
-- Determine delta ($\Large \delta$; the value from appendix A.4 that would result in given level of power at $\Large \alpha = .05$)
+- Determine delta ( $\Large \delta$ ; the value from appendix A.4 that would result in given level of power at $\Large \alpha = .05$)
 - Solve: 
 $$
 \Huge(\LARGE \frac{\delta}{d}\Huge)\LARGE^2 + 1 = N
@@ -703,8 +703,7 @@ class: inverse, center, middle
 ```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
 library(haven)        # Read in SPSS datasets
-library(psych)        # Lots of nice tid-bits
-library(car)          # Companion to "Applied Regression"
+library(furniture)    # for tableC()
 ```
 
 ```{r, eval=FALSE}
@@ -728,22 +727,97 @@ cancer_clean <- cancer_raw %>%
 ```
 
 ---
+# R Code: Basic Correlations
+
+.pull-left[
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "less",
+           method = "pearson")
+```
+
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "greater",
+           method = "pearson")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+]
+
+---
+## R Code: Correlation Matrix
+
+.pull-left[
+```{r, eval=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6)
+```
+]
+
+.pull-right[
+```{r, eval=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6,
+                    na.rm=TRUE)
+```
+]
+```{r, echo=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6)
+```
+```{r, echo=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6,
+                    na.rm=TRUE)
+```
+
+
+---
 # R Code: Scatterplot with Regression Line
 
-
-
----
-# R Code: Scatterplot with Facetting
-
-
-
----
-# R Code: Correlation Matrix
+```{r}
+cancer_clean %>%
+  ggplot(aes(totalcin, totalcw2)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
 
 
 
 ---
-# R Code: Correlations by Group
+# R Code: Scatterplot with Count
+
+```{r}
+cancer_clean %>%
+  ggplot(aes(totalcin, totalcw2)) +
+    geom_count() +
+    geom_smooth(method = "lm")
+```
 
 
 

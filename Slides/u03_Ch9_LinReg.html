@@ -500,7 +500,7 @@ Talk about each piece of the output
 Want to know N necessary to reject `\(\Large H_0\)` given an effect `\(\Large \rho\)` (we transform it into a `\(\Large d\)`)
 
 - Determine effect size needed to detect
-- Determine delta ($\Large \delta$; the value from appendix A.4 that would result in given level of power at `\(\Large \alpha = .05\)`)
+- Determine delta ( `\(\Large \delta\)` ; the value from appendix A.4 that would result in given level of power at `\(\Large \alpha = .05\)`)
 - Solve: 
 $$
 \Huge(\LARGE \frac{\delta}{d}\Huge)\LARGE^2 + 1 = N
@@ -575,8 +575,7 @@ class: inverse, center, middle
 ```r
 library(tidyverse)    # Loads several very helpful 'tidy' packages
 library(haven)        # Read in SPSS datasets
-library(psych)        # Lots of nice tid-bits
-library(car)          # Companion to "Applied Regression"
+library(furniture)    # for tableC()
 ```
 
 
@@ -600,22 +599,126 @@ cancer_clean &lt;- cancer_raw %&gt;%
 ```
 
 ---
+# R Code: Basic Correlations
+
+.pull-left[
+
+```r
+cancer_clean %&gt;%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+
+
+```r
+cancer_clean %&gt;%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "less",
+           method = "pearson")
+```
+
+
+```r
+cancer_clean %&gt;%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "greater",
+           method = "pearson")
+```
+]
+
+.pull-right[
+
+```
+
+	Pearson's product-moment correlation
+
+data:  totalcin and totalcw2
+t = 1.5885, df = 23, p-value = 0.1258
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.09215959  0.63114058
+sample estimates:
+     cor 
+0.314421 
+```
+]
+
+---
+## R Code: Correlation Matrix
+
+.pull-left[
+
+```r
+cancer_clean %&gt;%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6)
+```
+]
+
+.pull-right[
+
+```r
+cancer_clean %&gt;%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6,
+                    na.rm=TRUE)
+```
+]
+
+```
+
+─────────────────────────────────────────────────────
+             [1]           [2]           [3]   [4]  
+ [1]totalcin 1.00                                   
+ [2]totalcw2 0.314 (0.126) 1.00                     
+ [3]totalcw4 0.222 (0.287) 0.337 (0.099) 1.00       
+ [4]totalcw6 NA NA         NA NA         NA NA 1.00 
+─────────────────────────────────────────────────────
+```
+
+```
+
+─────────────────────────────────────────────────────────────
+             [1]           [2]           [3]           [4]  
+ [1]totalcin 1.00                                           
+ [2]totalcw2 0.282 (0.192) 1.00                             
+ [3]totalcw4 0.206 (0.346) 0.314 (0.145) 1.00               
+ [4]totalcw6 0.098 (0.657) 0.378 (0.075) 0.763 (&lt;.001) 1.00 
+─────────────────────────────────────────────────────────────
+```
+
+
+---
 # R Code: Scatterplot with Regression Line
 
 
+```r
+cancer_clean %&gt;%
+  ggplot(aes(totalcin, totalcw2)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+&lt;img src="u03_Ch9_LinReg_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+
+
 
 ---
-# R Code: Scatterplot with Facetting
+# R Code: Scatterplot with Count
 
 
+```r
+cancer_clean %&gt;%
+  ggplot(aes(totalcin, totalcw2)) +
+    geom_count() +
+    geom_smooth(method = "lm")
+```
 
----
-# R Code: Correlation Matrix
-
-
-
----
-# R Code: Correlations by Group
+&lt;img src="u03_Ch9_LinReg_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
