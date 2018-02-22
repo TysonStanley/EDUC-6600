@@ -341,12 +341,13 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 - Building block for many other statistical methods
 ]
 
-.pull-left[
-### Population: $\Huge \rho$
-]
-.pull-right[
-### Sample: `r`
-]
+.pull-left[.huge[.center[
+Population: $\Huge \rho$
+]]]
+
+.pull-right[.huge[.center[
+Sample: `r`
+]]]
 
 
 
