@@ -612,6 +612,39 @@ cancer_clean %&gt;%
            method = "pearson")
 ```
 
+]
+
+.pull-right[
+
+```
+
+	Pearson's product-moment correlation
+
+data:  totalcin and totalcw2
+t = 1.5885, df = 23, p-value = 0.1258
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.09215959  0.63114058
+sample estimates:
+     cor 
+0.314421 
+```
+]
+---
+count: false
+
+# R Code: Basic Correlations
+
+.pull-left[
+
+```r
+cancer_clean %&gt;%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+
 
 ```r
 cancer_clean %&gt;%
@@ -704,7 +737,7 @@ cancer_clean %&gt;%
     geom_smooth(method = "lm")
 ```
 
-&lt;img src="u03_Ch9_LinReg_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="u03_Ch9_LinReg_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -719,7 +752,7 @@ cancer_clean %&gt;%
     geom_smooth(method = "lm")
 ```
 
-&lt;img src="u03_Ch9_LinReg_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="u03_Ch9_LinReg_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
 
 
 

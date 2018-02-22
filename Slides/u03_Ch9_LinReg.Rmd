@@ -739,6 +739,31 @@ cancer_clean %>%
            method = "pearson")
 ```
 
+]
+
+.pull-right[
+```{r, echo=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+]
+---
+count: false
+
+# R Code: Basic Correlations
+
+.pull-left[
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+
 ```{r, eval=FALSE}
 cancer_clean %>%
   cor.test(~ totalcin + totalcw2,
