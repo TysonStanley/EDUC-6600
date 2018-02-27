@@ -1,0 +1,361 @@
+---
+title: "Linear Regression"
+subtitle: "Cohen Chapter 10 <br><br> .small[EDUC/PSY 6600]"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: pres3.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment     = NA,
+                      cache       = TRUE,
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE,
+                      fig.align   = "center",   # center all figures
+                      fig.width   = 6.5,        # set default figure width to 4 inches
+                      fig.height  = 4.5)        # set default figure height to 3 inches
+```
+
+class: center, middle
+
+## Fit the analysis to the data, *not* the data to the analysis.
+
+### - Statistical Maxim
+
+---
+## Motivating Example
+
+.large[
+- Dr. Ramsey conducts a *non-experimental* study to evaluate what she refers to as the 'strength-injury hypothesis.' It states that overall body strength in elderly women determines the number and severity of accidents that cause bodily injury. If the results support her hypothesis, she plans to conduct an experimental study to assess whether weight training reduces injuries in elderly women. 
+- Data from 100 women who range in age from 60 to 70 years old are collected. The women initially undergo a series of measures that assess upper and lower body strength, and these measures are summarized into an overall index of body strength. 
+- Over the next 5 years, the women record each time they have an accident that results in a bodily injury and describe fully the extent of the injury. On the basis of these data, Dr. Ramsey calculates an overall injury index for each woman. 
+- A simple regression analysis is conducted with the overall index of body strength as the predictor (independent) variable and the overall injury index as the outcome (dependent) variable. 
+
+]
+
+---
+# Correlation vs. Regression
+
+.pull-left[
+## Correlation
+.large[
+- Relationship between two variables (no outcome or predictor)
+- Strength and direction of relationship
+]]
+
+--
+
+.pull-right[
+## Regression
+.large[
+- Outcome and predictor (directional)
+- Simple and Multiple Linear Regression
+]]
+
+---
+# Regression Basics
+
+.pull-left[.large[
+- Y usually predicted variable
+  - A.k.a: Dependent, criterion, outcome, response variable
+  - Predicting Y from X = 'Regressing Y on X'
+- X usually variable used to predict Y
+  - A.k.a: Independent, predictor, explanatory variable
+- Different results when X & Y switched
+]]
+
+.pull-right[.large[
+Regression analysis is procedure for obtaining *the* line that best fits data (Assuming relationship is best described as linear)
+]]
+
+---
+# Regression Basics
+
+$$ \LARGE \hat{Y_i} = b_0 + b_1 X_i $$
+
+.pull-left[.large[
+
+.dcoral[
+$\Large \hat{Y_i}$ = predicted (unobserved) value of Y for a given case i
+]
+
+.bluer[
+$\Large b_0$ = y-intercept:
+
+Constant, $\Large \hat{Y}$ when X = 0, only interpreted if X = 0 is meaningful
+
+Alternative notation: $\Large a$ or $\Large a_{XY}$ 
+
+]]]
+
+.pull-right[.large[
+.nicegreen[
+$\Large b_1$ = slope of regression line for 1st IV
+
+Constant, Rate of change in Y for every 1-unit change in X
+
+Alternative notation: $\Large b_{XY}$
+]
+
+.dcoral[
+$\Large X_i$ = value of predictor for a given case i
+]]]
+
+---
+# Accuracy of Prediction
+.huge[
+.dcoral[Correlation] $\Large \neq$ .dcoral[Causation]
+]
+
+.large[
+
+- All points do not fall on regression line
+  - Prediction works for most, but not all in sample
+
+- W/out knowledge of X, best prediction of Y is mean $\Large \bar{Y}$
+  - Y: best measure of prediction error
+
+- With knowledge of X, best prediction of Y is from the equation $\Large \hat{Y}$
+  - Standard error of estimate (SEE or $s_{Y.X}$ ): best measure of prediction error
+  - Estimated SD of residuals in population
+]
+
+---
+background-image: url(figures/fig_spurious.jpeg)
+background-position: 50% 50%
+background-size: 1200px
+
+
+.footnote[http://www.tylervigen.com/spurious-correlations]
+
+---
+# Always **Visualize** Data First
+
+### Scatterplots
+
+```{r, echo=FALSE}
+set.seed(843)
+df <- tibble::data_frame(
+  x = rnorm(100),
+  y = x + rnorm(100)
+)
+```
+
+.pull-left[
+
+*Aka: scatterdiagrams, scattergrams*
+
+Notes:
+1. Can stratify scatterplots by subgroups
+2. Each subject is represented by 1 dot (x and y coordinate)
+3. Fit line can indicate nature and degree of relationship (Regression or prediction lines)
+
+
+```{r, eval=FALSE}
+library(tidyverse)
+df %>%
+  ggplot(aes(x, y)) +
+    geom_point() +
+    geom_smooth(se = FALSE,
+                method = "lm")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+library(tidyverse)
+df %>%
+  ggplot(aes(x, y)) +
+    geom_point() +
+    geom_smooth(se = FALSE,
+                method = "lm")
+```
+]
+
+---
+
+
+
+
+
+---
+
+
+
+
+
+---
+class: inverse, center, middle
+
+# Let's Apply This to the Cancer Dataset 
+
+
+---
+# Read in the Data
+
+```{r}
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(haven)        # Read in SPSS datasets
+library(furniture)    # for tableC()
+```
+
+```{r, eval=FALSE}
+cancer_raw <- haven::read_spss("cancer.sav")
+```
+
+```{r, include=FALSE}
+cancer_raw <- haven::read_spss("data/cancer.sav")
+```
+
+### And Clean It
+
+```{r, message=FALSE, warning=FALSE}
+cancer_clean <- cancer_raw %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate(id = factor(id)) %>% 
+  dplyr::mutate(trt = factor(trt,
+                             labels = c("Placebo", 
+                                        "Aloe Juice"))) %>% 
+  dplyr::mutate(stage = factor(stage))
+```
+
+---
+# R Code: Basic Correlations
+
+.pull-left[
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+]
+---
+count: false
+
+# R Code: Basic Correlations
+
+.pull-left[
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "less",
+           method = "pearson")
+```
+
+```{r, eval=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "greater",
+           method = "pearson")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+cancer_clean %>%
+  cor.test(~ totalcin + totalcw2,
+           data = .,
+           alternative = "two.sided",
+           method = "pearson")
+```
+]
+
+---
+## R Code: Correlation Matrix
+
+.pull-left[
+```{r, eval=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6)
+```
+]
+
+.pull-right[
+```{r, eval=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6,
+                    na.rm=TRUE)
+```
+]
+```{r, echo=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6)
+```
+```{r, echo=FALSE}
+cancer_clean %>%
+  furniture::tableC(totalcin, totalcw2, 
+                    totalcw4, totalcw6,
+                    na.rm=TRUE)
+```
+
+
+---
+# R Code: Scatterplot with Regression Line
+
+```{r}
+cancer_clean %>%
+  ggplot(aes(totalcin, totalcw2)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+
+
+---
+# R Code: Scatterplot with Count
+
+```{r}
+cancer_clean %>%
+  ggplot(aes(totalcin, totalcw2)) +
+    geom_count() +
+    geom_smooth(method = "lm")
+```
+
+
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+
+---
+class: inverse, center, middle
+
+# Next Topic
+
+### Linear Regression
