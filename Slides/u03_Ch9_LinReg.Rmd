@@ -518,8 +518,7 @@ Note: You can sometimes *transform* a non-linear association to a linear form, f
 Why are correlations not resistant to outliers?
 
 When do outliers have more *leverage*?
-]
-]
+]]
 
 
 ---
