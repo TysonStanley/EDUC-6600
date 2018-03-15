@@ -80,11 +80,6 @@ ano <- function(formula, data, ss = "III", posthoc = "tukey", adjust = "none", c
 }
 anoRM(z, dep = c("a1", "a2", "a3"), covariates = c("b1", "c1"))
 
-
-
-
-
-
 print.ano <- function(x, ...){
   cat("-----\n",
       "Analysis of Variance\n",
