@@ -2,7 +2,8 @@ library(tidyverse)
 
 df <- data_frame(
   outcome = c(8,10,9,10,9,7,8,5,8,5,4,8,7,5,7),
-  group   = c(rep(1, 5), rep(2, 5), rep(3, 5))
+  group   = c(rep(1, 5), rep(2, 5), rep(3, 5)),
+  id      = 1:length(group)
 ) %>%
   mutate(group = factor(group, labels = c("A", "B", "C")))
 
@@ -20,19 +21,20 @@ df %>%
                   data = .,
                   center = mean)
 
-df %>%
-  aov(outcome ~ group, 
-      data = .) %>%
-  summary()
+fit_anova <- df %>%
+  afex::aov_4(outcome ~ group + (1|id), 
+      data = .) 
+
+fit_anova
+fit_anova$Anova
 
 df %>%
   dplyr::group_by(group) %>%
   summarize(means = mean(outcome),
-            ses   = sd(outcome)/sqrt(n())) %>%
-  ggplot(aes(group, means)) +
-    geom_point() +
-    geom_errorbar(aes(ymin = means - 2*ses, ymax = means + 2*ses),
-                  width = .2)
+            ses   = sd(outcome)/sqrt(n()))
+df %>%
+  ggplot(aes(group, outcome)) +
+    stat_summary()
 
   
   
