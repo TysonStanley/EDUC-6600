@@ -121,11 +121,11 @@ Can see .dcoral[central tendency] (continuous data) or .dcoral[most common value
                     
                     ──────────────────────────────────────────────────────
                      x       Freq CumFreq Percent CumPerc Valid  CumValid
-                     1       233  233     23.30%  23.30%  23.92% 23.92%  
-                     2       265  498     26.50%  49.80%  27.21% 51.13%  
-                     3       232  730     23.20%  73.00%  23.82% 74.95%  
-                     4       244  974     24.40%  97.40%  25.05% 100.00% 
-                     Missing 26   1000    2.60%   100.00%                
+                     1       260  260     26.00%  26.00%  26.48% 26.48%  
+                     2       251  511     25.10%  51.10%  25.56% 52.04%  
+                     3       249  760     24.90%  76.00%  25.36% 77.39%  
+                     4       222  982     22.20%  98.20%  22.61% 100.00% 
+                     Missing 18   1000    1.80%   100.00%                
                     ──────────────────────────────────────────────────────
 ```
 
@@ -135,7 +135,7 @@ Can see .dcoral[central tendency] (continuous data) or .dcoral[most common value
 .pull-left[
 ### Bar Graph
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 ]
 
 --
@@ -143,7 +143,7 @@ Can see .dcoral[central tendency] (continuous data) or .dcoral[most common value
 .pull-right[
 ### Histogram
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 ]
 
 ???
@@ -219,6 +219,9 @@ data_raw &lt;- readxl::read_excel("Ihno_dataset.xls") %&gt;%
 ```
 
 
+```
+FALSE Warning: package 'readxl' was built under R version 3.4.4
+```
 
 --
 ### And Clean It
@@ -314,7 +317,7 @@ data_clean %&gt;%
   geom_bar()
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
 
 ---
 # Bar Charts
@@ -326,7 +329,7 @@ data_clean %&gt;%
   geom_bar()
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms
@@ -338,7 +341,7 @@ data_clean %&gt;%
   geom_histogram()
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms (change number of bins)
@@ -350,7 +353,7 @@ data_clean %&gt;%
   geom_histogram(bins = 8)
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms (change bins to size 5)
@@ -362,7 +365,7 @@ data_clean %&gt;%
   geom_histogram(binwidth = 5)
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms
@@ -374,7 +377,7 @@ data_clean %&gt;%
   geom_histogram(binwidth = 4)
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms -by- a Factor (columns)
@@ -387,7 +390,7 @@ data_clean %&gt;%
   facet_grid(. ~ coffeeF)
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -401,7 +404,7 @@ data_clean %&gt;%
   facet_grid(coffeeF ~ .)
 ```
 
-![](01_Ch2_DataViz_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -503,8 +506,15 @@ class: inverse, center, middle
 "countIncrementalSlides": false,
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
