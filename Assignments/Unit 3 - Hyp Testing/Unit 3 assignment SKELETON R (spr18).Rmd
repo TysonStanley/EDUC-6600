@@ -334,7 +334,7 @@ GRE
 
 **DIRECTIONS:** Calculate the matched pairs t test between `verbalGRE_1`and `verbalGRE_2` in the `GRE` dataset. 
 
-In order to use this function, you MUST first restructure your dataset so that the TWO continous variables are stacked or **gathered** together.  Use the `dplyr::gather()` function with the following FOUR options:
+In order to use this function, you MUST first restructure your dataset so that the TWO continous variables are stacked or **gathered** together.  Use the `tidyr::gather()` function with the following FOUR options:
 
   * A new variable name that will store the original variable names:  `key = new_group_var`
   * A new variable name that will store the original variable values: `value = new_continuous_var`
@@ -510,11 +510,11 @@ test_scores
 
 -------------------------------
 
-**DIRECTIONS:** Create a scatterplot for `anx_base` and `anx_post`, AFTER first using a `dplyr::filter()` funtion in a prepatroy step to restrict to the subsample of students age 29 and below.
+**DIRECTIONS:** Create a scatterplot for `anx_base` and `anx_post`, AFTER first using a `dplyr::filter()` funtion in a prepatroy step to restrict to the subsample of students with baseline anxiety of 29 and below.
 
 
 ```{r Q9c2b1}
-# Scatterplot: anx_base vs. anx_post <-- restricting to age 29 and younger
+# Scatterplot: anx_base vs. anx_post <-- restricting to baseline anxiety of 29 and lower
 
 ```
 
@@ -523,10 +523,10 @@ test_scores
 
 -------------------------------
 
-**DIRECTIONS:** Compute Pearson's $r$: for `anx_base` and `anx_post`, AFTER first using a `dplyr::filter()` funtion in a prepatroy step to restrict to the subsample of students age 29 and below.
+**DIRECTIONS:** Compute Pearson's $r$: for `anx_base` and `anx_post`, AFTER first using a `dplyr::filter()` funtion in a prepatroy step to restrict to the subsample of students with baseline anxiety of 29 and below.
 
 ```{r Q9c2b2}
-# Pearson's r: anx_base & anx_post <-- restricting to age 29 and younger
+# Pearson's r: anx_base & anx_post <-- restricting to baseline anxiety of 29 and lower
 
 ```
 
