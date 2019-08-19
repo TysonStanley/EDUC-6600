@@ -16,8 +16,6 @@ output:
 
 # Chapter 1. DATA PREPARATION
 
-
-
 ```{r, include=FALSE}
 # set global chunk options...  
 #  this changes the defaults so you don't have to repeat yourself
