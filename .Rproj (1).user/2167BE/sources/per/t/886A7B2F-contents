@@ -1,0 +1,125 @@
+---
+output: 
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: preamble.tex
+geometry: margin=.5in
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      cache = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      comment = "          ",
+                      results = 'markup')
+```
+
+\Huge EDUC/PSY 6600 \normalsize  \hfill Name:___________________________
+
+\large Unit 3 Exam \normalsize (Summer 2018) \hfill Score:________ /100
+
+\vspace{10pt}
+
+**Directions:** This exam covers unit 3 material. You may use your notes and homework. You have 30 minutes to complete it. Good luck!
+
+## `Multiple Choice [5 points each]` -- Circle the one-correct answer.
+
+1. A researcher finds that the **correlation** between obesity and satisfaction with life in general is -.74, and that this correlation is statistically significant using the .05 criterion. The researcher can conclude that:
+    a. Being obese (i.e., overweight) makes people unhappy with life in general.
+    b. Being unhappy with life in general causes people to become overweight.
+    c. Neither of the above. <!-- Correct -->
+    d. Both a. and b.
+    
+\vspace{10pt}
+
+2. The **matched t** will _equal_ the **independent-samples t** calculated on the same data, when:
+    a. The correlation between the two sets of scores is zero. <!-- Correct -->
+    b. The correlation between the two sets of scores is 1.0.
+    c. The variability of the difference scores is zero.
+    d. The sample variances of the two sets of scores are equal.
+
+\vspace{10pt}
+
+3. The **coefficient of determination** ($r^2$) can be interpreted as:
+    a. The proportion of variance in the outcome explained by the predictor. <!-- Correct -->
+    b. The proportion of variance in the predictor accounted for by the outcome.
+    c. The degree of differences in means of the groups.
+    d. None of the above.
+
+\vspace{10pt}
+
+4. If the raw scores of X and Y are _standardized_ (transformed into z-scores), which of the following is _TRUE_?
+    a. The correlation turns to zero.
+    b. The correlation and regression estimate are equal. <!-- Correct -->
+    c. The correlation can never be negative.
+    d. The correlation turns to 1.0.
+
+
+## `Statistical Application [80 points]`
+
+**Situation:** A famous singer wants to know if her music changes attitudes regarding a political position (i.e., by listening to her music, an attitude change occurs). She hires you to set up an experiment. You recruit 10 individuals, give them a baseline attitude test, have the participants listen to the music, and then administer a posttest regarding their attitudes. You then analyze the collected data, using the useful information you learned from your 6600 class.
+
+Two sets of output are found below, one for regression and one for matched t-test. Report and interpret the output that corresponds to the correct analysis of the situation at hand. The following table shows descriptive statistics of the sample.
+
+6. **Circle the appropriate output** (on the following page) that answers the research question. `[25 points]`
+
+```{r}
+set.seed(843)
+library(tidyverse)
+df <- data_frame(
+  baseline = runif(9, max = 5) + 5,
+  posttest = baseline + runif(9, max = 5)
+)
+```
+
+```{r, results = 'asis', comment = ""}
+df %>%
+  mutate(diff = posttest - baseline) %>%
+  tidyr::gather("time", "value", 1:3) %>%
+  mutate(time = factor(time, levels = c("baseline", "posttest", "diff"),
+                       labels = c("Baseline", "Posttest", "Difference Score"))) %>%
+  mutate(Measure = time) %>%
+  dplyr::group_by(Measure) %>%
+  furniture::table1(value,
+                    var_names = c("Mean (SD)"),
+                    type = "condense",
+                    output = "latex2",
+                    caption = "Descriptive statistics of the sample.")
+```
+
+\newpage
+
+```{r}
+df %>%
+  lm(posttest ~ baseline,
+     data = .) %>%
+  summary
+cat("\n------")
+```
+
+```{r}
+df %>%
+  tidyr::gather("time", "value", 1:2) %>%
+  mutate(time = factor(time, levels = c("posttest", "baseline"),
+                       labels = c("Posttest", "Baseline"))) %>%
+  t.test(value ~ time,
+         data = .,
+         paired = TRUE)
+```
+
+7. Calculate the appropriate **effect size** for the results. `[15 points]`
+
+
+\vspace{140pt}
+
+
+8. **Report** the correct results in **APA format** and **interpret** it, including the significance, effect size, and confidence intervals. `[20 points for proper reporting; 20 for correct interpretation]`
+
+
+
+
+
+
