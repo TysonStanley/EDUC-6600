@@ -497,17 +497,17 @@ class: inverse, center, middle
 
 ```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
-library(haven)        # Read in SPSS datasets
+library(rio)          # Read in SPSS datasets
 library(psych)        # Lots of nice tid-bits
 library(car)          # Companion to "Applied Regression"
 ```
 
 ```{r, eval=FALSE}
-cancer_raw <- haven::read_spss("cancer.sav")
+cancer_raw <- rio::import("cancer.sav")
 ```
 
 ```{r, include=FALSE}
-cancer_raw <- haven::read_spss("data/cancer.sav")
+cancer_raw <- rio::import("data/cancer.sav")
 ```
 
 --
