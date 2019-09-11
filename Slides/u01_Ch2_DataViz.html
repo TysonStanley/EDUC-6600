@@ -121,11 +121,11 @@ Can see .dcoral[central tendency] (continuous data) or .dcoral[most common value
                     
                     ──────────────────────────────────────────────────────
                      x       Freq CumFreq Percent CumPerc Valid  CumValid
-                     1       260  260     26.00%  26.00%  26.48% 26.48%  
-                     2       251  511     25.10%  51.10%  25.56% 52.04%  
-                     3       249  760     24.90%  76.00%  25.36% 77.39%  
-                     4       222  982     22.20%  98.20%  22.61% 100.00% 
-                     Missing 18   1000    1.80%   100.00%                
+                     1       216  216     21.60%  21.60%  22.13% 22.13%  
+                     2       260  476     26.00%  47.60%  26.64% 48.77%  
+                     3       253  729     25.30%  72.90%  25.92% 74.69%  
+                     4       247  976     24.70%  97.60%  25.31% 100.00% 
+                     Missing 24   1000    2.40%   100.00%                
                     ──────────────────────────────────────────────────────
 ```
 
@@ -211,17 +211,14 @@ background-size: 800px
 
 ```r
 library(tidyverse)   # the easy button
-library(readxl)      # read in Excel files
+library(rio)      # read in Excel files
 library(furniture)   # nice tables
 
-data_raw &lt;- readxl::read_excel("Ihno_dataset.xls") %&gt;% 
+data_raw &lt;- rio::import("Ihno_dataset.xls") %&gt;% 
   dplyr::rename_all(tolower)                   # converts all variable names to lower case
 ```
 
 
-```
-FALSE Warning: package 'readxl' was built under R version 3.4.4
-```
 
 --
 ### And Clean It
@@ -516,19 +513,30 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

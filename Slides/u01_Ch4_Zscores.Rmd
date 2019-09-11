@@ -87,11 +87,11 @@ Many dependent variables are assumed to be normally distributed
 ```{r, echo=FALSE, fig.width = 5.5, fig.height=5}
 set.seed(2)
 library(tidyverse)
-data_frame(x = rnorm(1000)) %>%
+tibble(x = rnorm(1000)) %>%
   ggplot(aes(x, ..density..)) +
   geom_histogram(alpha = .5, color = "black", fill = "lightgrey") +
   geom_density(size = 2, color = "blue") +
-  anteo::theme_anteo_wh(base_size = 18) 
+  theme_minimal(base_size = 18) 
 ```
 
 ]
@@ -122,13 +122,13 @@ data <- data_frame(x = rnorm(100))
 p1 <- data %>%
   ggplot(aes(x)) +
     geom_histogram(bins = 10) +
-    anteo::theme_anteo_wh(base_size = 18)
+    theme_minimal(base_size = 18)
 
 p2 <- data %>%
   ggplot(aes(sample = x)) +
     geom_qq() +
     geom_abline(slope = 1, intercept = 0) +
-    anteo::theme_anteo_wh(base_size = 18)
+    theme_minimal(base_size = 18)
 
 gridExtra::grid.arrange(p1, p2, nrow = 1)
 ```
@@ -163,13 +163,13 @@ df = data_frame(x  = rnorm(100, 110, 10.5)) %>%
 p1 = ggplot(df,
             aes(x = x)) +
     geom_density(alpha = .5, fill = "chartreuse3", color = "chartreuse4") +
-    anteo::theme_anteo_wh() +
+    theme_minimal() +
   labs(x = "Original",
        title = "Original Units")
 p2 = ggplot(df,
             aes(x = xs)) +
     geom_density(alpha = .5, fill = "dodgerblue3", color = "dodgerblue4") +
-    anteo::theme_anteo_wh() +
+    theme_minimal() +
   labs(x = "Standardized",
        title = "Standardized Units")
 gridExtra::grid.arrange(p1, p2, ncol = 1)
@@ -493,17 +493,17 @@ class: inverse, center, middle
 
 ```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
-library(haven)        # Read in SPSS datasets
+library(rio)          # Read in SPSS datasets
 library(furniture)    # Nice tables (by our own Tyson Barrett)
 library(psych)        # Lots of nice tid-bits
 ```
 
 ```{r, eval=FALSE}
-cancer_raw <- haven::read_spss("cancer.sav")
+cancer_raw <- rio::import("cancer.sav")
 ```
 
 ```{r, include=FALSE}
-cancer_raw <- haven::read_spss("data/cancer.sav")
+cancer_raw <- rio::import("data/cancer.sav")
 ```
 
 --
@@ -572,7 +572,5 @@ class: inverse, center, middle
 # Next Topic
 
 ### Intro to Hypothesis Testing: 1 Sample z-test
-
--- after Exam 1 --
 
 

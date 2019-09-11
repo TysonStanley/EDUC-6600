@@ -294,8 +294,8 @@ df
 
 Generally looks like:
 
-- `my_fun(arg1, arg2)`
-    - `my_fun` is the function's name
+- `stuff(arg1, arg2)`
+    - `stuff` is the function's name
     - `()` surround the arguments that go in the function
     -`arg1` etc. are the pieces of information we give a function
 ]]
@@ -362,7 +362,7 @@ mean(df$x)
 - .large[If your data is called `my_data_file.csv`, then:]
 
 ```{r, eval = FALSE}
-my_data <- read.csv("my_data_file.csv")
+my_data <- rio::import("my_data_file.csv")
 ```
 
 --
@@ -370,7 +370,7 @@ my_data <- read.csv("my_data_file.csv")
 - .large[If your data is called `my_data_file.txt` (and is tab-delimited), then:]
 
 ```{r, eval = FALSE}
-my_data <- read.table("my_data_file.txt", sep="\t", header=TRUE)
+my_data <- rio::import("my_data_file.txt", sep="\t", header=TRUE)
 ```
 
 --
@@ -378,8 +378,7 @@ my_data <- read.table("my_data_file.txt", sep="\t", header=TRUE)
 - .large[If your data is an SPSS file, then:]
 
 ```{r, eval = FALSE}
-library(haven)
-my_data <- read_spss("my_data_file.sav")
+my_data <- rio::import("my_data_file.sav")
 ```
 
 ---
@@ -408,14 +407,14 @@ background-size: 800px
 
 ```{r, eval=FALSE}
 ## Data is in .sav form (SPSS)
-library(haven)
-d <- read_spss("Data/Ihno_dataset.sav")
+library(rio)
+d <- rio::import("Data/Ihno_dataset.sav")
 d
 ```
 
 ```{r, echo=FALSE}
-library(haven)
-d <- read_spss("~/Dropbox/Teaching/EDUC 6600/Data/Ihno_dataset.sav")
+library(rio)
+d <- rio::import("~/GoogleDrive/3 Teaching/EDUC 6600/Data/Ihno_dataset.sav")
 d
 ```
 
@@ -442,9 +441,9 @@ d_clean
 d_clean <- d_clean %>%
   mutate(newVar = Mathquiz/2)
 ```
-
+*Note that I removed the other variables just to show you but in reality all the variables are still there
 ```{r, echo=FALSE}
-data_frame(Mathquiz = d_clean$Mathquiz, 
+tibble(Mathquiz = d_clean$Mathquiz, 
            newVar = d_clean$newVar)
 ```
 
@@ -471,9 +470,10 @@ tableF(d_clean, Phobia)
 
 ```{r}
 library(furniture)
-table1(d_clean, 
-       Mathquiz, Phobia, Coffee,
-       splitby = Major)
+library(dplyr)
+d_clean %>% 
+  dplyr::group_by(Major) %>% 
+  table1(Mathquiz, Phobia, Coffee)
 ```
 
 ---

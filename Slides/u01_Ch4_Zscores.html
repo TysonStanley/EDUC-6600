@@ -446,14 +446,14 @@ class: inverse, center, middle
 
 ```r
 library(tidyverse)    # Loads several very helpful 'tidy' packages
-library(haven)        # Read in SPSS datasets
+library(rio)          # Read in SPSS datasets
 library(furniture)    # Nice tables (by our own Tyson Barrett)
 library(psych)        # Lots of nice tid-bits
 ```
 
 
 ```r
-cancer_raw &lt;- haven::read_spss("cancer.sav")
+cancer_raw &lt;- rio::import("cancer.sav")
 ```
 
 
@@ -505,14 +505,14 @@ cancer_clean %&gt;%
 
 ```
 # A tibble: 6 x 5
-  id    trt       age    agez    ageZ
-  &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 1     Placebo    52 -0.589  -0.591 
-2 5     Placebo    77  1.35    1.34  
-3 6     Placebo    60  0.0310  0.0278
-4 9     Placebo    61  0.109   0.105 
-5 11    Placebo    59 -0.0465 -0.0495
-6 15    Placebo    69  0.729   0.724 
+  id    trt       age    agez ageZ[,1]
+  &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1 1     Placebo    52 -0.589   -0.591 
+2 5     Placebo    77  1.35     1.34  
+3 6     Placebo    60  0.0310   0.0278
+4 9     Placebo    61  0.109    0.105 
+5 11    Placebo    59 -0.0465  -0.0495
+6 15    Placebo    69  0.729    0.724 
 ```
 ]
 
@@ -565,8 +565,6 @@ class: inverse, center, middle
 # Next Topic
 
 ### Intro to Hypothesis Testing: 1 Sample z-test
-
--- after Exam 1 --
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
@@ -585,19 +583,30 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

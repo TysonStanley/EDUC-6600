@@ -260,7 +260,7 @@ ggplot(x, aes(value, fill = skew, color = skew)) +
                      guide = FALSE) +
   scale_color_manual(values = c("dodgerblue4", "chartreuse4", "coral3"),
                      guide = FALSE) +
-  anteo::theme_anteo_wh() +
+  theme_minimal() +
   theme(panel.spacing = unit(.2, "cm")) +
   theme_bw(base_size = 18)
 
@@ -360,7 +360,7 @@ data_frame(
          y = "Test Score") +
     scale_color_manual(values = c("chartreuse3", "coral2"),
                        guide = FALSE) +
-    anteo::theme_anteo_wh(base_size = 18)
+    theme_minimal(base_size = 18)
 ```
 
 
@@ -383,7 +383,7 @@ p1 = ggplot(y,
          title = "Density") +
     scale_color_manual(values = c("chartreuse3", "coral2"),
                        guide = FALSE) +
-    anteo::theme_anteo_wh(base_size = 18)
+    theme_minimal(base_size = 18)
 p2 = ggplot(y, aes(x = treatment, group = group, fill = group)) +
     geom_density(alpha = .5) +
     labs(x = "Group",
@@ -391,7 +391,7 @@ p2 = ggplot(y, aes(x = treatment, group = group, fill = group)) +
          title = "Density by Group") +
     scale_fill_manual(values = c("chartreuse3", "coral2"),
                        guide = FALSE) +
-    anteo::theme_anteo_wh(base_size = 18)
+    theme_minimal(base_size = 18)
 gridExtra::grid.arrange(p1, p2, ncol = 2)
 ```
 
@@ -404,7 +404,7 @@ data_frame(x = rnorm(50)) %>%
   ggplot(aes(sample = x)) +
     geom_qq() +
     geom_abline(slope = 1, intercept = 0) +
-    anteo::theme_anteo_wh(base_size = 18)
+    theme_minimal(base_size = 18)
 ```
 
 
@@ -420,17 +420,17 @@ class: inverse, center, middle
 
 ```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
-library(haven)        # Read in SPSS datasets
+library(rio)          # Read in SPSS datasets
 library(furniture)    # Nice tables (by our own Tyson Barrett)
 library(psych)        # Lots of nice tid-bits
 ```
 
 ```{r, eval=FALSE}
-cancer_raw <- haven::read_spss("cancer.sav")
+cancer_raw <- rio::import("cancer.sav")
 ```
 
 ```{r, include=FALSE}
-cancer_raw <- haven::read_spss("data/cancer.sav")
+cancer_raw <- rio::import("data/cancer.sav")
 ```
 
 --
