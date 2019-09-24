@@ -814,7 +814,7 @@ data_new <- data_clean %>%
 **TEXTBOOK QUESTION:** *(C) Perform a contrast to compare the "impossible" condition with the other three for postquiz heart rate. How does the significance of this contrast compare to the one-way ANOVA? Explain. Looking at the means for the four conditions, design a contrast that you think would capture a large proportion of between-group variance.*
 
 
-### Tutorial - Contrast Statements for One-way ANOVA models
+#### Tutorial - Contrast Statements for One-way ANOVA models
 
 There are two steps to conduct a contrast comparison:
 
@@ -969,7 +969,7 @@ data_undergrad_long %>% head(n = 12)
 \clearpage
 
 
-### Tutorial - Fitting Two-way ANOVA Models with `afex::aov_4()`
+#### Tutorial - Fitting Two-way ANOVA Models with `afex::aov_4()`
 
 The only difference between a one-way and two-way ANOVA's syntax is the inclusion of a second grouping variable in the formula.  
 
@@ -1008,7 +1008,7 @@ aov_name <- data_name %>%
 
 **TEXTBOOK QUESTION:** *(B) Draw a graph of the cell means. Does the interaction obscure the interpretation of the main effects?*
 
-### Tutorial - Cell Means: Displaying in a Grid and Plotting
+#### Tutorial - Cell Means: Displaying in a Grid and Plotting
 
 For a two-way ANOVA, we often would like to see a grid of the means for all combinations of the two grouping factors.  This is may be achieved by the following steps:
 
@@ -1079,7 +1079,7 @@ data_undergrad_long %>%
 
 \clearpage
 
-### Tutorial - Pairwise Post Hoc comparisons for a One-way ANOVA
+#### Tutorial - Pairwise Post Hoc comparisons for a One-way ANOVA
 
 There are two steps to conduct all possible pairwise comparisons:
 
