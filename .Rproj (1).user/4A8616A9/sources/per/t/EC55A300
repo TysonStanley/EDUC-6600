@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566242758816.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3903969882",
+    "id" : "EC55A300",
+    "lastKnownWriteTime" : 1568234880,
+    "last_content_update" : 1568234880731,
+    "path" : "~/GoogleDrive/3 Teaching/EDUC 6600/Slides/u00_Ch1_Intro.Rmd",
+    "project_path" : "Slides/u00_Ch1_Intro.Rmd",
+    "properties" : {
+        "cursorPosition" : "445,6",
+        "scrollLine" : "431"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1568234918684.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "91761734",
+    "id" : "F81E5DBB",
+    "lastKnownWriteTime" : 1568235079,
+    "last_content_update" : 1568235079875,
+    "path" : "~/GoogleDrive/3 Teaching/EDUC 6600/Slides/u01_Ch2_DataViz.Rmd",
+    "project_path" : "Slides/u01_Ch2_DataViz.Rmd",
+    "properties" : {
+        "cursorPosition" : "234,29",
+        "scrollLine" : "217"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
