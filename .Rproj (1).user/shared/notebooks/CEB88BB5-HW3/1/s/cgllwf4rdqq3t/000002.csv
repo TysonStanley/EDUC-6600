@@ -1,0 +1,7 @@
+"0","# Raw data: summary table"
+"0","memory_long %>% "
+"0","  dplyr::group_by(stimuli) %>%                 # divide into groups"
+"0","  furniture::table1(recall,                   # gives M(SD)"
+"0","                    output = ""markdown"")    # add chunk option: results=""asis"""
+"2","Using dplyr::group_by() groups: stimuli
+"

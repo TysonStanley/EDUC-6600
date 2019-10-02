@@ -1,0 +1,4 @@
+"0","audience_long %>% "
+"0","  ggplot(aes(x = audience,"
+"0","             y = blood_pressure)) +"
+"0","  stat_summary()"

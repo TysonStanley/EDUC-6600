@@ -133,7 +133,7 @@ Repeat Exercise 1 for the variables `prevmath` and `phobia`.
 
 Request a frequency distribution and a histogram for the variable `statquiz`.  Use the option in the function `geom_histogram(bins = #)` to change the number of bins or `geom_histogram(binwidth = #)` to change the bin width to give a better figure.
 
-> IN THE WRITEUP: Describe the shape of this distribution.
+**ANSWER:** Describe the shape of this distribution.
 
 ```{r}
 # Frequency distrubution: statquiz
@@ -154,7 +154,7 @@ Request a frequency distribution and a histogram for the variable `statquiz`.  U
 
 Request a frequency distribution and a histogram for the variables baseline anxiety (`anx_base`) and baseline heart rate (`hr_base`). 
 
-> IN THE WRITEUP: Comment on R's choice of class intervals for each histogram.
+**ANSWER:** Comment on R's choice of class intervals for each histogram.
 
 ```{r}
 # Frequency distrubution: anx_base
@@ -369,7 +369,7 @@ Request *means* and *SD's* of the *z-score* variables to demonstrate that the me
 
 # Chapter 5. Intro to Hypothesis Testing: 1 Sample `z`-Test
 
-## 5C-3. 1 Sample `z`-Test compared to historic controls for `mathquiz` and `statquiz`
+## FIX!!! 5C-3. 1 Sample `z`-Test compared to historic controls for `mathquiz` and `statquiz`
 
 **TEXTBOOK QUESTION:** *(A) In the past 10 years, previous stats classes who took the same math quiz that Inho's students took **averaged 28** with a **standard deviation of 8.5**. What is the two-tailed p value for Inho's students with respect to that past population? (Don't forget that the N for mathquiz is not 100.)  Would you say that Inho's class performed significantly better than previous classes? Explain. (B) Redo part a assuming that the same previous classes had also taken the same statquiz and **averaged 6.1** with a **standard deviation of 2.5**.*
 
@@ -382,7 +382,7 @@ Request *means* and *SD's* of the *z-score* variables to demonstrate that the me
 
 ```
 
-
+**ANSWER:** 
 
 
 

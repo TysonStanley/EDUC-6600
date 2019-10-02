@@ -1,0 +1,8 @@
+"0","audience_long %>% "
+"0","  ggplot(aes(x = audience,"
+"0","             y = blood_pressure,"
+"0","             group = id,"
+"0","             color = id,"
+"0","             shape = id)) +"
+"0","  geom_point() +"
+"0","  geom_line()"

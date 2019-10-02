@@ -1,0 +1,5 @@
+"0","remotes::install_github(""tysonstanley/educ6600"")
+"
+"2","Skipping install of 'educ6600' from a github remote, the SHA1 (f3d0077d) has not changed since last install.
+  Use `force = TRUE` to force installation
+"

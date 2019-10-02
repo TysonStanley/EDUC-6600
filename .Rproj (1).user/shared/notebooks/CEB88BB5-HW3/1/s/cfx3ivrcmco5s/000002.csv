@@ -1,0 +1,20 @@
+"0","# Raw data: summary table"
+"0","tasks_long %>% "
+"0","  dplyr::group_by(type_task, noise) %>%     # divide into groups"
+"0","  dplyr::summarise(mean = mean(completed),"
+"0","                   sd   = sd(completed)) %>% "
+"0","  dplyr::mutate(msd = paste0(round(mean, 2), "" ("", round(sd, 2), "")"")) %>% "
+"0","  dplyr::select(-mean, -sd) %>% "
+"0","  tidyr::spread(key = noise,"
+"0","                value = msd) %>% "
+"0","  pander::pander()"
+"1","
+-----------------------------------------------------
+ type_task    background      metal        popular   
+------------ ------------- ------------ -------------
+  clerical    10.8 (4.87)    6 (2.55)    11.2 (2.77) 
+
+ mechanical   13.6 (4.51)   18.2 (3.7)   16.2 (5.02) 
+-----------------------------------------------------
+
+"

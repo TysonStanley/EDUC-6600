@@ -1,0 +1,3 @@
+"0","data_clean %>% "
+"0","  dplyr::select(sub_num, anx_base, anx_pre, anx_post) %>% "
+"0","  head(n = 4)"

@@ -1,0 +1,3 @@
+"0","ihno_statquiz_long %>% "
+"0","  dplyr::select(sub_num, time, s_quiz) %>% "
+"0","  head(n = 10)"

@@ -1,0 +1,3 @@
+"0","ihno_hr_long %>% "
+"0","  dplyr::select(sub_num, genderF, time, hr) %>% "
+"0","  head(n = 12)"

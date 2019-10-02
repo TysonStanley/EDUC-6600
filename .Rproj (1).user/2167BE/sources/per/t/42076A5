@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569303577679.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2052880164",
+    "id" : "42076A5",
+    "lastKnownWriteTime" : 1569356947,
+    "last_content_update" : 1569360520842,
+    "path" : "~/GoogleDrive/3 Teaching/EDUC 6600/Assignments/HW2/HW2.Rmd",
+    "project_path" : "Assignments/HW2/HW2.Rmd",
+    "properties" : {
+        "cursorPosition" : "39,37",
+        "docOutlineVisible" : "1",
+        "scrollLine" : "29"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

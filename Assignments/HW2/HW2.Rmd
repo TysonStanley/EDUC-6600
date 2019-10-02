@@ -152,7 +152,7 @@ data("data_memory")
 
 ```
 
-
+**ANSWER:** Interpret the results of the t-test: Does the test suggest men and women have idfferent baseline heart rates?
 
 
 
@@ -180,7 +180,6 @@ data("data_memory")
 # indep groups t-test for means: hr_post by coffeeF
 
 ```
-
 
 
 # Chapter 8

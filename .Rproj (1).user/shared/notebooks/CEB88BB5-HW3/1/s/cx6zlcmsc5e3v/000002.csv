@@ -1,0 +1,3 @@
+"0","data_clean %>% "
+"0","  dplyr::select(sub_num, statquiz, exp_sqz) %>% "
+"0","  head(n = 5)"

@@ -1,0 +1,3 @@
+"0","ihno_anx_long %>% "
+"0","  dplyr::select(sub_num, time, anxiety) %>% "
+"0","  head(n = 12)"

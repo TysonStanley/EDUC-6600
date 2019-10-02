@@ -1,0 +1,8 @@
+"0","anograms_long %>% "
+"0","  ggplot(aes(x = difficulty,"
+"0","             y = correct,"
+"0","             group = id,"
+"0","             shape = feedback,"
+"0","             color = feedback)) +"
+"0","  geom_point(size = 3) +"
+"0","  geom_line()"

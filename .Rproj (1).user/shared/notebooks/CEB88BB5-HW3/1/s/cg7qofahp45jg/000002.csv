@@ -1,0 +1,22 @@
+"0","# Raw data: summary table"
+"0","brain_long %>% "
+"0","  dplyr::group_by(damage, stimuli) %>%     # divide into groups"
+"0","  dplyr::summarise(mean = mean(longest_correct),"
+"0","                   sd   = sd(longest_correct)) %>% "
+"0","  dplyr::mutate(msd = paste0(round(mean, 2), "" ("", round(sd, 2), "")"")) %>% "
+"0","  dplyr::select(-mean, -sd) %>% "
+"0","  tidyr::spread(key = stimuli,"
+"0","                value = msd) %>% "
+"0","  pander::pander()"
+"1","
+--------------------------------------------------
+ damage      digit        letter         mixed    
+-------- ------------- ------------- -------------
+  left     7 (0.89)     5.67 (1.21)   5.83 (1.47) 
+
+  none     9 (0.89)     8.67 (1.21)   8.33 (0.82) 
+
+ right    8.17 (0.98)   7.5 (0.84)    7.5 (1.05)  
+--------------------------------------------------
+
+"
