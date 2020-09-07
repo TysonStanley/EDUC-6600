@@ -261,7 +261,7 @@ data_clean <- data_raw %>%
 .pull-left[
 ```{r, message=FALSE, warning=FALSE}
 data_clean %>%                 
-  furniture::tableF(major)
+  furniture::tableF(majorF)
 ```
 ]
 

@@ -1,6 +1,0 @@
-"0","tasks_long %>% "
-"0","  ggplot(aes(x = noise,"
-"0","             y = completed,"
-"0","             shape = type_task,"
-"0","             color = type_task)) +"
-"0","  stat_summary()"

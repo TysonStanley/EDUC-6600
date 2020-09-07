@@ -1,8 +1,0 @@
-"0","ihno_statquiz_long <- data_clean %>% "
-"0","  tidyr::gather(key = variable,"
-"0","                value = s_quiz,"
-"0","                statquiz, exp_sqz) %>% "
-"0","  dplyr::mutate(time = case_when(variable == ""statquiz"" ~ ""background"","
-"0","                                 variable == ""exp_sqz""  ~ ""experimental"") %>% "
-"0","                  factor()) %>% "
-"0","  dplyr::arrange(sub_num, time)"

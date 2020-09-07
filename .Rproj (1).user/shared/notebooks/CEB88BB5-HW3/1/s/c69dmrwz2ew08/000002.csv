@@ -1,4 +1,0 @@
-"0","textbook_long %>% "
-"0","  ggplot(aes(x = book,"
-"0","             y = quiz)) +"
-"0","  stat_summary()"

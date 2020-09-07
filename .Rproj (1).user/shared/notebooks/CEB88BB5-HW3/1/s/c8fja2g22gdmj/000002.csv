@@ -1,3 +1,0 @@
-"0","data_clean %>% "
-"0","  dplyr::select(sub_num, genderF, hr_base, hr_pre, hr_post) %>% "
-"0","  head(n = 4)"

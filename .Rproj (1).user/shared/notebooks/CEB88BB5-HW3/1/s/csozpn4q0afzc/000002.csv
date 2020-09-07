@@ -1,8 +1,0 @@
-"0","memory_long %>% "
-"0","  ggplot(aes(x = stimuli,"
-"0","             y = recall,"
-"0","             group = id,"
-"0","             shape = id,"
-"0","             color = id)) +"
-"0","  geom_point() +"
-"0","  geom_line()"

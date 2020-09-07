@@ -1,6 +1,0 @@
-"0","brain_long %>% "
-"0","  ggplot(aes(x = stimuli,"
-"0","             y = longest_correct,"
-"0","             shape = damage,"
-"0","             color = damage)) +"
-"0","  stat_summary()"

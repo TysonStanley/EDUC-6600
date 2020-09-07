@@ -1,6 +1,0 @@
-"0","anograms_long %>% "
-"0","  ggplot(aes(x = difficulty,"
-"0","             y = correct,"
-"0","             shape = feedback,"
-"0","             color = feedback)) +"
-"0","  stat_summary()"

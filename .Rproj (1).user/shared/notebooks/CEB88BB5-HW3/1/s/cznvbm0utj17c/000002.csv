@@ -1,4 +1,0 @@
-"0","memory_long %>% "
-"0","  ggplot(aes(x = stimuli,"
-"0","             y = recall)) +"
-"0","  stat_summary()"

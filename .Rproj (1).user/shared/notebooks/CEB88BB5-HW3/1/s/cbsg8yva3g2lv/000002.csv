@@ -1,7 +1,0 @@
-"0","# Raw data: summary table"
-"0","audience_long %>% "
-"0","  dplyr::group_by(audience) %>%             # divide into groups"
-"0","  furniture::table1(blood_pressure,         # gives M(SD)"
-"0","                    output = ""markdown"")    # add chunk option: results=""asis"""
-"2","Using dplyr::group_by() groups: audience
-"
