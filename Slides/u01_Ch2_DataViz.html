@@ -121,11 +121,11 @@ Can see .dcoral[central tendency] (continuous data) or .dcoral[most common value
                     
                     ──────────────────────────────────────────────────────
                      x       Freq CumFreq Percent CumPerc Valid  CumValid
-                     1       248  248     24.80%  24.80%  25.46% 25.46%  
-                     2       254  502     25.40%  50.20%  26.08% 51.54%  
-                     3       244  746     24.40%  74.60%  25.05% 76.59%  
-                     4       228  974     22.80%  97.40%  23.41% 100.00% 
-                     Missing 26   1000    2.60%   100.00%                
+                     1       251  251     25.10%  25.10%  25.82% 25.82%  
+                     2       248  499     24.80%  49.90%  25.51% 51.34%  
+                     3       241  740     24.10%  74.00%  24.79% 76.13%  
+                     4       232  972     23.20%  97.20%  23.87% 100.00% 
+                     Missing 28   1000    2.80%   100.00%                
                     ──────────────────────────────────────────────────────
 ```
 
@@ -307,14 +307,33 @@ data_clean %&gt;%
 ---
 # Bar Charts
 
+.pull-left[
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(major)) +
-  geom_bar()
+  ggplot() +
+  aes(majorF)
 ```
 
 ![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+]
+
+--
+
+.pull-right[
+
+
+```r
+data_clean %&gt;% 
+  ggplot() +
+  aes(majorF) +
+  geom_bar()
+```
+
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+]
+
 
 ---
 # Bar Charts
@@ -322,11 +341,12 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(coffee)) +
+  ggplot() +
+  aes(coffee) +
   geom_bar()
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms
@@ -334,11 +354,12 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(phobia)) +
+  ggplot() +
+  aes(phobia) +
   geom_histogram()
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms (change number of bins)
@@ -346,11 +367,12 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(phobia)) +
+  ggplot() +
+  aes(phobia) +
   geom_histogram(bins = 8)
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms (change bins to size 5)
@@ -358,11 +380,12 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(phobia)) +
+  ggplot() +
+  aes(phobia) +
   geom_histogram(binwidth = 5)
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms
@@ -370,11 +393,12 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(mathquiz)) +
+  ggplot() +
+  aes(mathquiz) +
   geom_histogram(binwidth = 4)
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 ---
 # Histograms -by- a Factor (columns)
@@ -382,12 +406,13 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(mathquiz)) +
+  ggplot() +
+  aes(mathquiz) +
   geom_histogram(binwidth = 4) +
   facet_grid(. ~ coffeeF)
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -396,12 +421,13 @@ data_clean %&gt;%
 
 ```r
 data_clean %&gt;% 
-  ggplot(aes(mathquiz)) +
+  ggplot() +
+  aes(mathquiz) +
   geom_histogram(binwidth = 4) +
   facet_grid(coffeeF ~ .)
 ```
 
-![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+![](u01_Ch2_DataViz_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
 
 ---
 

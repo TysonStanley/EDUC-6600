@@ -293,63 +293,85 @@ data_clean %>%
 ---
 # Bar Charts
 
-```{r, fig.width=8, fig.height=5.5}
+.pull-left[
+```{r, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(major)) +
+  ggplot() +
+  aes(majorF)
+```
+]
+
+--
+
+.pull-right[
+
+```{r, fig.width=7, fig.height=5}
+data_clean %>% 
+  ggplot() +
+  aes(majorF) +
   geom_bar()
 ```
+
+]
+
 
 ---
 # Bar Charts
 
-```{r, fig.width=8, fig.height=5.5}
+```{r, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(coffee)) +
+  ggplot() +
+  aes(coffee) +
   geom_bar()
 ```
 
 ---
 # Histograms
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(phobia)) +
+  ggplot() +
+  aes(phobia) +
   geom_histogram()
 ```
 
 ---
 # Histograms (change number of bins)
 
-```{r, message=FALSE, comment=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+```{r, message=FALSE, comment=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(phobia)) +
+  ggplot() +
+  aes(phobia) +
   geom_histogram(bins = 8)
 ```
 
 ---
 # Histograms (change bins to size 5)
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(phobia)) +
+  ggplot() +
+  aes(phobia) +
   geom_histogram(binwidth = 5)
 ```
 
 ---
 # Histograms
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5.5}
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(mathquiz)) +
+  ggplot() +
+  aes(mathquiz) +
   geom_histogram(binwidth = 4)
 ```
 
 ---
 # Histograms -by- a Factor (columns)
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(mathquiz)) +
+  ggplot() +
+  aes(mathquiz) +
   geom_histogram(binwidth = 4) +
   facet_grid(. ~ coffeeF)
 ```
@@ -358,9 +380,10 @@ data_clean %>%
 ---
 # Histograms -by- a Factor (rows)
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 data_clean %>% 
-  ggplot(aes(mathquiz)) +
+  ggplot() +
+  aes(mathquiz) +
   geom_histogram(binwidth = 4) +
   facet_grid(coffeeF ~ .)
 ```
