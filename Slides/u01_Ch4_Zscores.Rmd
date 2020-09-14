@@ -193,7 +193,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 1)
 ---
 class: inverse, center, middle
 
-# Let's Apply This to an Exmple Situation 
+# Let's Apply This to an Example Situation 
 
 ---
 background-image: url(figures/fig_blank_normal_slide.png)
@@ -388,7 +388,7 @@ background-image: url(figures/web_clt.png)
 background-position: 50% 50%
 background-size: 950px
 
-[http://shiny.stat.calpoly.edu/Sampling_Distribution/](http://shiny.stat.calpoly.edu/Sampling_Distribution/)
+[https://saskiaotto.de/shiny/clt/](https://saskiaotto.de/shiny/clt/)
 
 
 
